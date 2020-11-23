@@ -25,22 +25,24 @@ const styles = StyleSheet.create({
         marginTop: (Platform.OS == 'ios') ? 60 : 30
     },
     initials: {
-        backgroundColor: '#333',
-        width: 120, 
-        height: 120, 
-        borderRadius: 120/2,
+        backgroundColor: '#fff',
+        borderWidth: 3, 
+        borderColor: '#2D7FF3',
+        width: 150, 
+        height: 150, 
+        borderRadius: 150/2,
         justifyContent: 'center',
     },
     initialsText: {
-        color: '#ffffff',
+        color: '#2D7FF3',
         textAlign: 'center',
         fontSize: 50
     },
     userInfo: {
-        marginTop: 20
+        marginTop: 10
     },
     textInfo: {
-        fontSize: 20
+        fontSize: 15
     }
 }); 
 
