@@ -11,7 +11,7 @@ const Header = ({ initials, name, username, role }) => {
 
             <View style={styles.userInfo}>
                 <Text style={styles.textInfo}>{name}</Text>
-                <Text style={styles.textInfo}>@{username}</Text>
+                <Text style={styles.textInfo}>{username}</Text>
                 <Text style={styles.textInfo}>{role}</Text>
             </View>
 
@@ -25,21 +25,19 @@ const styles = StyleSheet.create({
         marginTop: (Platform.OS == 'ios') ? 60 : 30
     },
     initials: {
-        backgroundColor: '#fff',
-        borderWidth: 3, 
-        borderColor: '#2D7FF3',
+        backgroundColor: '#333',
         width: 150, 
         height: 150, 
         borderRadius: 150/2,
         justifyContent: 'center',
     },
     initialsText: {
-        color: '#2D7FF3',
+        color: '#fff',
         textAlign: 'center',
         fontSize: 50
     },
     userInfo: {
-        marginTop: 10
+        marginTop: 10,
     },
     textInfo: {
         fontSize: 15
