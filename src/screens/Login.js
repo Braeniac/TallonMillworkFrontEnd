@@ -1,10 +1,9 @@
-import { useScrollToTop } from '@react-navigation/native';
 import React, { useState } from 'react'; 
 import { View, Text, TextInput, Platform, StyleSheet } from 'react-native'; 
 
 
 const onPress = () => {
-    console.log('from logout button')
+    console.log('login')
 }
 
 import CustomButton from '../components/CustomButton'; 
@@ -13,8 +12,6 @@ const Login = () => {
 
     const [username, setUserName] = useState(''); 
     const [password, setPassword] = useState('');
-
-    console.log(username);
 
     return (
         <View style={styles.container}>
