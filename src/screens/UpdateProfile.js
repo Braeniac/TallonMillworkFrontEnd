@@ -1,5 +1,6 @@
 import React from 'react'; 
-import { View, Text, Image, TouchableOpacity, Platform, StyleSheet } from 'react-native'; 
+import { View, Text, Image, TouchableOpacity, Platform, StyleSheet, SafeAreaView } from 'react-native'; 
+import { ScrollView } from 'react-native-gesture-handler';
 
 import Menu from '../components/Menu';
 import ChangePassword from '../components/ChangePassword'; 
@@ -8,28 +9,31 @@ import ChangeUsername from '../components/ChangeUsername';
 const UpdateProfile = ({ navigation }) => {
 
     return (
-        <View style={styles.container}>
-          <Menu navigation={navigation} />
-          <Text style={styles.title}>Update Profile</Text>    
-          <View>
-              <ChangeUsername />
-          </View>
-          <View>
-              <ChangePassword />
-          </View>
-
-         
-        </View>
+        <SafeAreaView style={{ flex : 1 }}>
+            <ScrollView>
+            <View style={styles.container}>
+                <Menu navigation={navigation} />
+                <Text style={styles.title}>Update Profile</Text>    
+                <View>
+                    <ChangeUsername />
+                </View>
+                <View>
+                    <ChangePassword />
+                </View>
+            </View>
+            </ScrollView>
+        </SafeAreaView>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
         marginLeft: 30,
-        marginRight: 30
+        marginRight: 30, 
+        marginBottom: 50
     }, 
     title: {
-        marginTop: 40, 
+        marginTop: 30, 
         marginBottom: 20, 
         fontSize: 50, 
         fontWeight: '200',

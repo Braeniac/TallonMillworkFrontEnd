@@ -22,7 +22,7 @@ const CustomDrawerContent = ({ navigation }) => {
                 <TouchableOpacity
                     onPress={() => navigation.navigate('DailyInstallReport')}
                 >
-                    <Text style={styles.navigationText}>Daily Install Report</Text>
+                    <Text style={styles.navigationText}>Create Daily Install Report</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     navigationText: {
         marginLeft: 30,
         marginBottom: (Platform.OS === 'ios' ? 42 : 30),
-        fontSize: 20,
+        fontSize: 18,
         fontWeight: '200'
     },
     logoutButton: {
