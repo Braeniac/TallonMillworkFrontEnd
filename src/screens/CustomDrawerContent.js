@@ -25,6 +25,12 @@ const CustomDrawerContent = ({ navigation }) => {
                 </TouchableOpacity>
 
                 <TouchableOpacity
+                    onPress={() => navigation.navigate('AddProject')}
+                >
+                    <Text style={styles.navigationText}>Add Project</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity
                     onPress={() => navigation.navigate('UpdateProfile')}
                 >
                     <Text style={styles.navigationText}>Update Profile</Text>
@@ -59,7 +65,7 @@ const styles = StyleSheet.create({
     },
     navigationText: {
         marginLeft: 30,
-        marginTop: 42,
+        marginTop: (Platform.OS === 'ios' ? 42 : 30),
         fontSize: 20,
         fontWeight: '200'
     },
