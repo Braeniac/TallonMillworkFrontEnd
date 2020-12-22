@@ -1,16 +1,17 @@
 import React from 'react'; 
-import {View, Text, TouchableOpacity, StyleSheet, Dimensions, Platform } from 'react-native'; 
+import {View, Text, TouchableOpacity, StyleSheet, Dimensions, Platform, SafeAreaView } from 'react-native'; 
 
 import Header from '../components/Header';
 import CustomButton from '../components/CustomButton'; 
+import { ScrollView } from 'react-native-gesture-handler';
 
 const height = Dimensions.get('window').height; 
 
 const CustomDrawerContent = ({ navigation }) => {
     return(
-
-        <View style={styles.container}>
-            <Header initials="MS" name="Maninder Singh" username="ms14xe" role="Admin" />
+        <SafeAreaView style={{ flex : 1 }}>
+            <ScrollView>
+                <Header initials="MS" name="Maninder Singh" username="ms14xe" role="Admin" />
           
                 <TouchableOpacity
                     onPress={() => navigation.navigate('Home')}
@@ -48,30 +49,28 @@ const CustomDrawerContent = ({ navigation }) => {
                     <Text style={styles.navigationText}>Delete User</Text>
                 </TouchableOpacity>
             
-            <View
-                style={styles.logoutButton}
-            >
-                <CustomButton title="Logout" />
-            </View>
+                <View
+                    style={styles.logoutButton}
+                >
+                    <CustomButton title="Logout" />
+                </View>
 
-        </View>
+            </ScrollView>
+        </SafeAreaView>
     ); 
 
 }
 
 const styles = StyleSheet.create({
-    container: {
-        height
-    },
     navigationText: {
         marginLeft: 30,
-        marginTop: (Platform.OS === 'ios' ? 42 : 30),
+        marginBottom: (Platform.OS === 'ios' ? 42 : 30),
         fontSize: 20,
         fontWeight: '200'
     },
     logoutButton: {
-        position: 'absolute', 
-        bottom: (Platform.OS === 'ios' ? 80 : 60),    
+        marginBottom: 50
+     
     }
 })
 

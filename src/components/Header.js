@@ -22,7 +22,8 @@ const Header = ({ initials, name, username, role }) => {
 const styles = StyleSheet.create({
     container: {
         marginLeft: 30,
-        marginTop: (Platform.OS == 'ios') ? 60 : 35
+        marginTop: (Platform.OS == 'ios') ? 60 : 35, 
+        marginBottom: 20
     },
     initials: {
         backgroundColor: '#333',

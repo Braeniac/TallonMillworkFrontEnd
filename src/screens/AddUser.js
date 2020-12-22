@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
         marginLeft: 30
     },
     title: {
-        marginTop: 50,
+        marginTop: (Platform.OS === 'ios' ? 50 : 30),
         fontSize: 50,
         fontWeight: '200',
         color: '#333'
