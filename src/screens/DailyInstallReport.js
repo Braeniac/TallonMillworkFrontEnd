@@ -7,6 +7,7 @@ const DailyInstallReport = ({ navigation }) => {
     return (
         <View style={styles.container}>
            <Menu navigation={navigation} />
+           <Text>daily install report</Text>
         </View>
     );
 }

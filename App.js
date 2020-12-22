@@ -13,6 +13,8 @@ import AddProject from './src/screens/AddProject';
 import AddUser from './src/screens/AddUser';
 import DeleteUser from './src/screens/DeleteUser';
 
+import Login from './src/screens/Login'; 
+
 const Drawer = createDrawerNavigator();
 
 export default function App() {
@@ -28,6 +30,7 @@ export default function App() {
         <Drawer.Screen  name="AddProject" component={AddProject} />
         <Drawer.Screen  name="AddUser" component={AddUser} />
         <Drawer.Screen  name="DeleteUser" component={DeleteUser} />
+        <Drawer.Screen  name="Login" component={Login} />
 
       </Drawer.Navigator>
     </NavigationContainer>

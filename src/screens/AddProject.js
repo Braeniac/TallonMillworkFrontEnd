@@ -5,6 +5,7 @@ const AddProject = ({ navigation }) => {
     return (
         <View style={styles.container}>
              <Menu navigation={navigation} />
+             <Text>add project</Text>
         </View>
     );
 }

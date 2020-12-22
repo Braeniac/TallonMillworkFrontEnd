@@ -7,6 +7,7 @@ const DeleteUser = ({ navigation }) => {
     return (
         <View style={styles.container}>
            <Menu navigation={navigation} />
+           <Text>delete user</Text>
         </View>
     );
 }

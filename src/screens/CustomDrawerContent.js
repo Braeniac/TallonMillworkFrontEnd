@@ -1,8 +1,8 @@
-import { blue } from '@material-ui/core/colors';
 import React from 'react'; 
 import {View, Text, TouchableOpacity, StyleSheet, Dimensions, Platform } from 'react-native'; 
 
 import Header from '../components/Header';
+import CustomButton from '../components/CustomButton'; 
 
 const height = Dimensions.get('window').height; 
 
@@ -41,17 +41,13 @@ const CustomDrawerContent = ({ navigation }) => {
                 >
                     <Text style={styles.navigationText}>Delete User</Text>
                 </TouchableOpacity>
-                
-
-            <TouchableOpacity
+            
+            <View
                 style={styles.logoutButton}
-                onPress={() => console.log('pressed')}
             >
-                <View style={styles.logoutContainer}>
-                    <Text style={styles.logoutText}>Logout</Text>
-                </View>
-            </TouchableOpacity>
-             
+                <CustomButton title="Logout" />
+            </View>
+
         </View>
     ); 
 
@@ -63,30 +59,13 @@ const styles = StyleSheet.create({
     },
     navigationText: {
         marginLeft: 30,
-        marginTop: 40,
+        marginTop: 42,
         fontSize: 20,
-        fontWeight: (Platform.OS === 'ios' ? '200' : `200`)
+        fontWeight: '200'
     },
     logoutButton: {
-        marginLeft: 30,
         position: 'absolute', 
-        bottom: 80, 
-        
-    },
-    logoutContainer: {
-        backgroundColor: '#2D7FF3',
-        width: 160,
-        height: 35,
-        justifyContent: 'center',
-        shadowColor: "#000",
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
-        elevation: 5,
-    },
-    logoutText: {
-        color: '#fff',
-        textAlign: 'center',
-        
+        bottom: (Platform.OS === 'ios' ? 80 : 60),    
     }
 })
 

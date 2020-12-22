@@ -7,6 +7,7 @@ const UpdateProfile = ({ navigation }) => {
     return (
         <View style={styles.container}>
           <Menu navigation={navigation} />
+          <Text>update profile</Text>
         </View>
     );
 }

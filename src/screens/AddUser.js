@@ -7,6 +7,7 @@ const AddUser = ({ navigation }) => {
     return (
         <View style={styles.container}>
           <Menu navigation={navigation} />
+          <Text>add user</Text>
         </View>
     );
 }
