@@ -17,7 +17,7 @@ import Login from './src/screens/Login';
 
 const Drawer = createDrawerNavigator();
 
-export default function App() {
+function Main() {
   return (
     <NavigationContainer>
       <Drawer.Navigator 
@@ -37,3 +37,8 @@ export default function App() {
   );
 }
 
+export default function App() {
+  return(
+    <Main />
+  )
+}

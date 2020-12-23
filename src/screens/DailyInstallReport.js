@@ -26,6 +26,7 @@ const DailyInstallReport = ({ navigation }) => {
                     <Text>Humidity: </Text>
                     <Text>Weather: </Text>
                 </View>
+
        
            
 
