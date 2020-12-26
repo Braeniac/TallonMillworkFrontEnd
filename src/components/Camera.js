@@ -1,17 +1,19 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native';
 
+
 import cam from '../assets/icons/cameraIcon.png'; 
 
-const Camera = () => {
+
+
+const Camera = ({ onPress }) => {
     return(
         <View style={styles.container}>
             <View>
             <TouchableOpacity
-                onPress={ () => console.log('take picture') }
+                onPress={() => onPress()}
             >
                 <Image
-                    // style={styles.menu}
                     source={cam} 
                 />
             </TouchableOpacity>
