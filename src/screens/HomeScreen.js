@@ -4,14 +4,11 @@ import { View, Text, Image, TouchableOpacity, Platform, StyleSheet } from 'react
 
 import Menu from '../components/Menu';
 
-
-
 const HomeScreen = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <Menu navigation={navigation} />
-            <Text>home screen</Text>
-
+            <Text>home screen</Text> 
             
 
           

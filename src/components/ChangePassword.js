@@ -3,8 +3,10 @@ import { View, Text, TextInput, StyleSheet } from 'react-native';
 
 import CustomButton from '../components/CustomButton'; 
 
+import SubmissionPage from '../screens/SubmissionPage';
+
 const onPress = () => {
-    console.log('change password')
+   
 }
 
 const ChangePassword = () => {
