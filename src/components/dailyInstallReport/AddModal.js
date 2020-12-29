@@ -3,12 +3,10 @@ import { View, Text, TextInput, TouchableOpacity, Modal, Alert, StyleSheet, Dime
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'; 
 
 
-const InstallersModal = ({ modalVisible, setModalVisable, title, DATA, setFunction }) => {
+const AddModal = ({ modalVisible, setModalVisable, title, DATA, setFunction, type, description }) => {
 
-    const [installers, setInstallers] = useState(DATA);
+    const [array, setArray] = useState(DATA);
     const [input, setInput] = useState('');  
-
-    console.log('from modal: ' + installers); 
 
     return(
         <Modal
@@ -31,11 +29,18 @@ const InstallersModal = ({ modalVisible, setModalVisable, title, DATA, setFuncti
                             width: Dimensions.get("window").width,
                         }}
                     >
+                        {
+                            (description === String.empty) ? null : 
+                            <View style={{ marginHorizontal: 20, alignItems: 'center' }}>
+                                <Text style={{ textAlign: 'center', fontSize: 20 }}>{description}</Text>
+                            </View>
+                        }
+                        
                          
                         <View style={{ marginLeft: 10, marginTop: 10 }}>      
                             <TextInput
                                 style={styles.textInput}
-                                placeholder="Add installer"
+                                placeholder={type}
                                 onChangeText={text => setInput(text)}
                                 autoCorrect={false}
                                 value={input}
@@ -58,7 +63,7 @@ const InstallersModal = ({ modalVisible, setModalVisable, title, DATA, setFuncti
                                     Alert.alert('', 'Please try again...')
                                     setInput('')
                                 } else {
-                                    setInstallers(oldArray => [...oldArray, input])
+                                    setArray(oldArray => [...oldArray, input])
                                     setInput('')
                                 }
                             }
@@ -66,15 +71,12 @@ const InstallersModal = ({ modalVisible, setModalVisable, title, DATA, setFuncti
                     >
                         <Text style={styles.OKButton}>Add</Text>
                     </TouchableOpacity>
-                    
-
-
-
+        
                     <TouchableOpacity
                         onPress={() => {
-                            setFunction(DATA.concat(installers))
+                            setFunction(DATA.concat(array))
                             setModalVisable(!modalVisible)
-                            setInstallers([])
+                            setArray([])
                         }}
                     >
                         <Text style={styles.OKButton}>Done</Text>
@@ -136,4 +138,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default InstallersModal; 
+export default AddModal; 

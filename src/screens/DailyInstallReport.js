@@ -281,12 +281,10 @@ import CustomButton from '../components/CustomButton';
 import CustomPicker from '../components/dailyInstallReport/CustomPicker'; 
 
 //checkboxmodal for installers and subtrades on site 
-import InstallersModal from '../components/dailyInstallReport/InstallersModal';
+import AddModal from '../components/dailyInstallReport/AddModal';
 import ReactChipsInput from 'react-native-chips';
 
-const onPress = () => {
-    console.log('add');
-}
+
 
 
 
@@ -451,8 +449,6 @@ const DailyInstallReport = ({ navigation }) => {
 
     // -------------------------------------------------------------------------------------------
 
-    console.log('from daily install report: ' + installers); 
-
     return(
         <>
             <View style={styles.menu}>
@@ -493,12 +489,13 @@ const DailyInstallReport = ({ navigation }) => {
                         }}
                     />
 
-                    <InstallersModal 
+                    <AddModal 
                         modalVisible={installersModal}
                         setModalVisable={setInstallersModal}
                         title="Installers"
                         setFunction={setInstallers}
                         DATA={installers}
+                        type="Add Installers"
                     />
 
                     { (installers.length === 0) ? null :
@@ -542,10 +539,51 @@ const DailyInstallReport = ({ navigation }) => {
                         takePhotoFromCamera={takePhotoFromCamera}
                         chooseFromLibrary={chooseFromLibrary}
                         title="Pre-Site Conditions"
+                    /> 
+
+                    <Add 
+                        title="Subtrades on site" 
+                        onPress={() => {
+                            setSubtradesOnSiteModal(!subtradesOnSiteModal)
+                        }} 
                     />
 
-                    <Add title="Subtrades on site" onPress={onPress} />
+                    <AddModal
+                        modalVisible={subtradesOnSiteModal}
+                        setModalVisable={setSubtradesOnSiteModal}
+                        title="Subtrades on site"
+                        DATA={subtradesOnSite}
+                        setFunction={setSubtradesOnSite}
+                        type="Add subtrades on site"
+                        description="Here are a few examples: Framing, plumbing, electrical, flooring, drywall, painters..."
+                    />
+
+                    { (subtradesOnSite.length === 0) ? null :
+                        <View>
+                            <ReactChipsInput 
+                                label="Installers added: " 
+                                initialChips={subtradesOnSite} 
+                                onChangeChips={
+                                   chips => setSubtradesOnSite([].concat(chips))
+                                }
+                                alertRequired={true} 
+                                chipStyle={{ 
+                                    borderColor: '#333', 
+                                    backgroundColor: '#fff' 
+                                }} 
+                                inputStyle={{fontSize: 22}} 
+                                labelStyle={{ color: '#333'}} 
+                                labelOnBlur={{ color: '#333' }} 
+                                labelStyle={{ fontSize: 15, color: '#333' }}
+                            />
+                        </View>
+                    }
                     
+
+
+
+
+
                     <Text style={styles.text}>Work to be completed: </Text>
                     <TextInput
                         style={styles.textInput}
@@ -624,7 +662,7 @@ const DailyInstallReport = ({ navigation }) => {
                         DATA={listcompletedBy}
                         setFunction={setCompletedBy}
                         itemType="name"
-                    />
+                    /> 
 
                     </View> 
                     </KeyboardAwareScrollView>
