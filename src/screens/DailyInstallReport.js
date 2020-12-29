@@ -451,6 +451,8 @@ const DailyInstallReport = ({ navigation }) => {
 
     // -------------------------------------------------------------------------------------------
 
+    console.log('from daily install report: ' + installers); 
+
     return(
         <>
             <View style={styles.menu}>
@@ -496,6 +498,7 @@ const DailyInstallReport = ({ navigation }) => {
                         setModalVisable={setInstallersModal}
                         title="Installers"
                         setFunction={setInstallers}
+                        DATA={installers}
                     />
 
                     { (installers.length === 0) ? null :
@@ -504,7 +507,7 @@ const DailyInstallReport = ({ navigation }) => {
                                 label="Installers added: " 
                                 initialChips={installers} 
                                 onChangeChips={
-                                   chips => setInstallers([...chips])
+                                   chips => setInstallers([].concat(chips))
                                 }
                                 alertRequired={true} 
                                 chipStyle={{ 

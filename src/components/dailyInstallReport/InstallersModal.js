@@ -5,8 +5,10 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 
 const InstallersModal = ({ modalVisible, setModalVisable, title, DATA, setFunction }) => {
 
-    const [installers, setInstallers] = useState([]);
+    const [installers, setInstallers] = useState(DATA);
     const [input, setInput] = useState('');  
+
+    console.log('from modal: ' + installers); 
 
     return(
         <Modal
@@ -70,8 +72,9 @@ const InstallersModal = ({ modalVisible, setModalVisable, title, DATA, setFuncti
 
                     <TouchableOpacity
                         onPress={() => {
-                            setFunction(installers)
+                            setFunction(DATA.concat(installers))
                             setModalVisable(!modalVisible)
+                            setInstallers([])
                         }}
                     >
                         <Text style={styles.OKButton}>Done</Text>
