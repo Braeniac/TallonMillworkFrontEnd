@@ -1,10 +1,8 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native';
 
-
-import cam from '../assets/icons/cameraIcon.png'; 
-
-
+//camera icon 
+import cam from '../../assets/icons/cameraIcon.png'; 
 
 const Camera = ({ onPress }) => {
     return(

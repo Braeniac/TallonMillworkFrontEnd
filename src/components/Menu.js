@@ -20,7 +20,7 @@ const Menu = ({ navigation }) => {
 
 const styles = StyleSheet.create({
     menu: {
-        marginTop: (Platform.OS == 'ios') ? 55 : 20,
+        marginTop: (Platform.OS == 'ios') ? 50 : 20,
     }
 })
 

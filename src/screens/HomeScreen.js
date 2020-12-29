@@ -28,10 +28,6 @@ const styles = StyleSheet.create({
     container: {
         marginLeft: 20,
     }, 
-    menu: {
-        marginTop: (Platform.OS == 'ios') ? 55 : 20,
-        color: '#333333'
-    }
 })
 
 export default HomeScreen; 

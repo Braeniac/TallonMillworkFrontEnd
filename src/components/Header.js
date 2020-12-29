@@ -12,7 +12,12 @@ const Header = ({ initials, name, username, role }) => {
             <View style={styles.userInfo}>
                 <Text style={styles.textInfo}>{name}</Text>
                 <Text style={styles.textInfo}>{username}</Text>
-                <Text style={styles.textInfo}>{role}</Text>
+                {role ? 
+                    <Text style={styles.textInfo}>Admin</Text>
+                :
+                null 
+                }
+                {/* <Text style={styles.textInfo}>{role}</Text> */}
             </View>
 
         </View>

@@ -9,7 +9,7 @@ import ChangeUsername from '../components/ChangeUsername';
 const UpdateProfile = ({ navigation }) => {
 
     return (
-        <SafeAreaView style={{ flex : 1 }}>
+        <SafeAreaView>
             <ScrollView>
             <View style={styles.container}>
                 <Menu navigation={navigation} />
@@ -28,9 +28,9 @@ const UpdateProfile = ({ navigation }) => {
 
 const styles = StyleSheet.create({
     container: {
-        marginLeft: 30,
-        marginRight: 30, 
-        marginBottom: 50
+        marginTop: (Platform.OS === 'ios' ? -45 : 0),
+        marginHorizontal: 20,
+        marginBottom: 30 
     }, 
     title: {
         marginTop: 30, 

@@ -50,8 +50,8 @@ const Login = () => {
 
 const styles = StyleSheet.create({
     container: {
-        marginLeft: 30,
-        marginRight: 30,
+        marginLeft: 20,
+        marginRight: 20,
         marginTop: (Platform.OS === 'ios' ? 200 : 160)
     }, 
     title: {

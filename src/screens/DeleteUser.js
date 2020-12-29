@@ -39,8 +39,8 @@ const DeleteUser = ({ navigation }) => {
 
 const styles = StyleSheet.create({
     container: {
-        marginLeft: 30,
-        marginRight: 30
+        marginLeft: 20,
+        marginRight: 20
     }, 
     title: {
         marginTop: 50, 

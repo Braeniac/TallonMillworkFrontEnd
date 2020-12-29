@@ -75,8 +75,8 @@ const AddUser = ({ navigation }) => {
 
 const styles = StyleSheet.create({
     container: {
-        marginRight: 30,
-        marginLeft: 30
+        marginRight: 20,
+        marginLeft: 20
     },
     title: {
         marginTop: (Platform.OS === 'ios' ? 50 : 30),

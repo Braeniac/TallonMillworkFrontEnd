@@ -1,11 +1,11 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
-const Add = ({ title }) => {
+const Add = ({ title, onPress }) => {
     return(
         <View style={styles.container}>
             <TouchableOpacity
-                onPress={() => console.log('add')}
+                onPress={onPress}
             >
                 <Text style={styles.plus}>+</Text>
                 <Text style={styles.text}>{title}</Text>
