@@ -1,5 +1,5 @@
 import React, { useState } from 'react'; 
-import { View, Text, TextInput, Platform, StyleSheet, Dimensions } from 'react-native';
+import { View, Text, TextInput, Platform, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'; 
 
 //login button
@@ -46,6 +46,13 @@ const Login = () => {
                 onChangeText={text => setPassword(text)}
                 value={password}
             />
+
+            <TouchableOpacity 
+                style={styles.forgetPassword}
+                onPress={() => console.log('forget password')}    
+            >
+                <Text style={{ fontSize: 18, color: '#2D7FF3' }}>Forget password?</Text>
+            </TouchableOpacity>
            
            <View
                 style={styles.button}
@@ -80,6 +87,9 @@ const styles = StyleSheet.create({
         height: 60, 
         borderBottomWidth: 2,
         color: '#333'
+    },
+    forgetPassword: {
+        paddingTop: 20
     },
     button: {
         marginTop: 40,
