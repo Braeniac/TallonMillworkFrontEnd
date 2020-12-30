@@ -1,12 +1,13 @@
 import React, { useState } from 'react'; 
-import { View, Text, TextInput, Platform, StyleSheet } from 'react-native'; 
+import { View, Text, TextInput, Platform, StyleSheet, Dimensions } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'; 
 
+//login button
+import CustomButton from '../components/CustomButton'; 
 
 const onPress = () => {
     console.log('login')
 }
-
-import CustomButton from '../components/CustomButton'; 
 
 const Login = () => {
 
@@ -14,6 +15,14 @@ const Login = () => {
     const [password, setPassword] = useState('');
 
     return (
+        <KeyboardAwareScrollView
+        style={{
+            display: "flex",
+            flex: 1,
+            height: Dimensions.get("window").height,
+            width: Dimensions.get("window").width,
+        }}
+        >
         <View style={styles.container}>
             <Text style={styles.title}>Login</Text>
             <Text style={styles.subTitle}>Please sign in to continue.</Text>
@@ -43,8 +52,8 @@ const Login = () => {
            >
                 <CustomButton title="Login" onPress={onPress} />
            </View>
-            
         </View>
+        </KeyboardAwareScrollView>
     );
 }
 
@@ -52,8 +61,8 @@ const styles = StyleSheet.create({
     container: {
         marginLeft: 20,
         marginRight: 20,
-        marginTop: (Platform.OS === 'ios' ? 200 : 160)
-    }, 
+        marginTop: (Platform.OS === 'ios' ? 200 : 160),
+    },   
     title: {
         fontSize: 60,
         fontWeight: '200',

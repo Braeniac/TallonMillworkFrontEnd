@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, StyleSheet } from 'react-native';
 
-import CustomButton from '../components/CustomButton'; 
-
-import SubmissionPage from '../screens/SubmissionPage';
+import CustomButton from '../CustomButton'; 
 
 const onPress = () => {
    

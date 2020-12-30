@@ -3,23 +3,37 @@ import { View, Text, Image, TouchableOpacity, Platform, StyleSheet, SafeAreaView
 import { ScrollView } from 'react-native-gesture-handler';
 
 import Menu from '../components/Menu';
-import ChangePassword from '../components/ChangePassword'; 
-import ChangeUsername from '../components/ChangeUsername'; 
+import ChangePassword from '../components/updateProfile/ChangePassword'; 
+import ChangeUsername from '../components/updateProfile/ChangeUsername'; 
 
-const UpdateProfile = ({ navigation }) => {
+const Profile = ({ navigation }) => {
 
     return (
         <SafeAreaView>
             <ScrollView>
             <View style={styles.container}>
                 <Menu navigation={navigation} />
-                <Text style={styles.title}>Update Profile</Text>    
-                <View>
+                <Text style={styles.title}>Profile</Text>    
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                {/* <View>
                     <ChangeUsername />
                 </View>
                 <View>
                     <ChangePassword />
-                </View>
+                </View> */}
+            
+            
+            
+            
+            
             </View>
             </ScrollView>
         </SafeAreaView>
@@ -41,4 +55,4 @@ const styles = StyleSheet.create({
     },  
 })
 
-export default UpdateProfile; 
+export default Profile; 

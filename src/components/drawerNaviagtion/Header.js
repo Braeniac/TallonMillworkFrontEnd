@@ -10,14 +10,9 @@ const Header = ({ initials, name, username, role }) => {
             </View>
 
             <View style={styles.userInfo}>
-                <Text style={styles.textInfo}>{name}</Text>
+                <Text style={styles.textInfo, { fontSize: 20,  }}>{name}</Text>
                 <Text style={styles.textInfo}>{username}</Text>
-                {role ? 
-                    <Text style={styles.textInfo}>Admin</Text>
-                :
-                null 
-                }
-                {/* <Text style={styles.textInfo}>{role}</Text> */}
+                {role ? <Text style={styles.textInfo}>(Admin)</Text> : null }
             </View>
 
         </View>
@@ -25,17 +20,22 @@ const Header = ({ initials, name, username, role }) => {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        marginLeft: 30,
-        marginTop: (Platform.OS == 'ios') ? 60 : 35, 
-        marginBottom: 20
+    container: { 
+        marginBottom: 20,
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '100%',
+        borderBottomWidth: 1,
+        borderColor: 'lightgray',
+        paddingBottom: 20,
+        paddingTop: 20, 
     },
     initials: {
         backgroundColor: '#333',
         width: 150, 
         height: 150, 
-        borderRadius: 150/2,
-        justifyContent: 'center',
+        borderRadius: 20,
+        justifyContent: 'center'
     },
     initialsText: {
         color: '#fff',
@@ -44,9 +44,11 @@ const styles = StyleSheet.create({
     },
     userInfo: {
         marginTop: 10,
+        textAlign: 'center',
     },
     textInfo: {
-        fontSize: 15
+        fontSize: 15,
+        textAlign: 'center'
     }
 }); 
 

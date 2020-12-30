@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, StyleSheet } from 'react-native';
 
-import CustomButton from '../components/CustomButton'; 
+import CustomButton from '../CustomButton'; 
 
 const onPress = () => {
     console.log('Change Username')

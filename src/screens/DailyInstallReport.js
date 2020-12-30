@@ -20,6 +20,8 @@ import CustomPicker from '../components/dailyInstallReport/CustomPicker';
 import AddModal from '../components/dailyInstallReport/AddModal';
 import ReactChipsInput from 'react-native-chips';
 
+
+//delete later 
 const onPress = () => console.log('form submited')
 
 
@@ -198,6 +200,19 @@ const DailyInstallReport = ({ navigation }) => {
                     >
                     <View style={{ marginHorizontal: 20 }}>  
 
+
+                    {/*  
+                    
+                    
+                        ADD 
+                            DATE
+                            TIME
+                            HUMIDITY 
+                            TEMPERATURE
+              
+                            
+                    */}
+
                     <TouchableOpacity
                         onPress={ () => setModalVisible(!modalVisible) }
                         style={{borderColor: '#333', borderBottomWidth: 2, paddingBottom: 10, marginTop: 10}}
@@ -270,7 +285,7 @@ const DailyInstallReport = ({ navigation }) => {
                         setModalVisible={setCameraModal}
                         takePhotoFromCamera={takePhotoFromCamera}
                         chooseFromLibrary={chooseFromLibrary}
-                        title="Pre-Site Conditions"
+                        title="Post-Site Conditions"
                     /> 
 
                     <Add 

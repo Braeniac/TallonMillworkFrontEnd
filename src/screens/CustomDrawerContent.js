@@ -1,27 +1,31 @@
 import React, { useState } from 'react'; 
-import {View, Text, TouchableOpacity, StyleSheet, Dimensions, Platform, SafeAreaView } from 'react-native'; 
-import Header from '../components/Header';
+import {View, StyleSheet, Dimensions, SafeAreaView } from 'react-native'; 
 import CustomButton from '../components/CustomButton'; 
 import { ScrollView } from 'react-native-gesture-handler';
 
-import AdminUser from '../components/AdminUser';
-import RegularUser from '../components/RegularUser';
+import Header from '../components/drawerNaviagtion/Header';
+import AdminUser from '../components/drawerNaviagtion/AdminUser';
+import RegularUser from '../components/drawerNaviagtion/RegularUser';
 
 const height = Dimensions.get('window').height; 
    
 const CustomDrawerContent = ({ navigation }) => {
 
+    const [initials, setInitials] = useState('MS'); 
+    const [name, setName] = useState('Maninder Singh'); 
+    const [username, setUsername] = useState('ms14xe'); 
     const [isAdmin, setIsAdmin] = useState(true); 
 
     return(
         <SafeAreaView style={{ flex : 1 }}>
             <ScrollView>
-                <Header initials="MS" name="Maninder Singh" username="ms14xe" role={isAdmin} />
+                
+                <Header initials={initials} name={name} username={username} role={isAdmin} />
 
                 {isAdmin ? 
-                    <AdminUser navigation={navigation}/>
+                    <AdminUser navigation={navigation} />
                 : 
-                    <RegularUser navigation={navigation}/>
+                    <RegularUser navigation={navigation} />
                 }
 
                 <View
@@ -39,6 +43,10 @@ const CustomDrawerContent = ({ navigation }) => {
 const styles = StyleSheet.create({
     logoutButton: {
         flex: 0.2
+    },
+    footers: {
+        borderColor: 'lightgray',
+        borderBottomWidth: 1
     }
 })
 
