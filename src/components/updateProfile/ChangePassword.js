@@ -13,7 +13,6 @@ const ChangePassword = () => {
     const [newPassword, setNewPassword] = useState('');
     const [verifyPassword, setVerifyPassword] = useState(''); 
 
-
     return(
         <View>
             <Text style={styles.title}>Change Password:</Text>

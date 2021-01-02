@@ -11,7 +11,6 @@ const HomeScreen = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <Menu navigation={navigation} />
-            <Text style={styles.title}>Welcome back, {name}!</Text> 
             
 
           

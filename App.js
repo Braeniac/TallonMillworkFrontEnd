@@ -2,6 +2,13 @@ import 'react-native-gesture-handler';
 import * as React from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
+import { createStore } from 'redux'; 
+import { Provider } from 'react-redux'
+
+
+//NAVIGATION SETUP!-------------------------------------------------------
+//side navigation drawer 
+const Drawer = createDrawerNavigator();
 
 //side drawer UI
 import CustomDrawerContent from './src/screens/CustomDrawerContent'; 
@@ -14,10 +21,19 @@ import AddProject from './src/screens/AddProject';
 import AddUser from './src/screens/AddUser';
 import DeleteUser from './src/screens/DeleteUser';
 import SubmissionPage from './src/screens/SubmissionPage'; 
-
 import Login from './src/screens/Login'; 
 
-const Drawer = createDrawerNavigator();
+//------------------------------------------------------------------------
+
+//REDUX SETUP!------------------------------------------------------------
+
+import reducers from './src/redux/reducers'; 
+
+let store = createStore(reducers); 
+
+
+
+
 
 function Main() {
   return (
@@ -42,6 +58,8 @@ function Main() {
 
 export default function App() {
   return(
+    <Provider store={store}>
     <Main />
+    </Provider>
   )
 }
