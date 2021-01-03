@@ -2,17 +2,24 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, Platform, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'; 
 
+//redux
+import { useSelector, useDispatch } from 'react-redux';
+
 //login button
 import CustomButton from '../components/CustomButton'; 
 
 const onPress = () => {
-    console.log('login')
+    console.log('pressed'); 
 }
 
-const Login = () => {
 
-    const [username, setUserName] = useState(''); 
-    const [password, setPassword] = useState('');
+const Login = ()  => {
+
+
+    const { username, password } = useSelector(state => state.auth); 
+    const dispatch = useDispatch(); 
+
+    // const [password, setPassword] = useState('');
 
     return (
         <KeyboardAwareScrollView
@@ -32,7 +39,7 @@ const Login = () => {
                 placeholder="Username"
                 autoCapitalize="none"
                 autoCorrect={false}
-                onChangeText={text => setUserName(text)}
+                onChangeText={text => dispatch({ type: 'username_changed', payload: text }) }
                 value={username}
             />
             
@@ -43,7 +50,7 @@ const Login = () => {
                 autoCompleteType="password"
                 secureTextEntry={true}
                 autoCorrect={false}
-                onChangeText={text => setPassword(text)}
+                onChangeText={text => dispatch({ type: 'password_changed', payload: text })}
                 value={password}
             />
 
@@ -59,6 +66,10 @@ const Login = () => {
            >
                 <CustomButton title="Login" onPress={onPress} />
            </View>
+
+                <Text>USERNAME: {username}</Text>
+                <Text>PASSWORD: {password}</Text>
+
         </View>
         </KeyboardAwareScrollView>
     );
@@ -96,5 +107,6 @@ const styles = StyleSheet.create({
         alignItems: 'flex-end'
     }
 })
+
 
 export default Login; 

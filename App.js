@@ -7,7 +7,7 @@ import { Provider } from 'react-redux'
 
 
 //NAVIGATION SETUP!-------------------------------------------------------
-//side navigation drawer 
+
 const Drawer = createDrawerNavigator();
 
 //side drawer UI
@@ -20,7 +20,6 @@ import Profile from './src/screens/Profile';
 import AddProject from './src/screens/AddProject';
 import AddUser from './src/screens/AddUser';
 import DeleteUser from './src/screens/DeleteUser';
-import SubmissionPage from './src/screens/SubmissionPage'; 
 import Login from './src/screens/Login'; 
 
 //------------------------------------------------------------------------
@@ -28,28 +27,24 @@ import Login from './src/screens/Login';
 //REDUX SETUP!------------------------------------------------------------
 
 import reducers from './src/redux/reducers'; 
-
 let store = createStore(reducers); 
 
-
-
-
+//------------------------------------------------------------------------
 
 function Main() {
   return (
     <NavigationContainer>
       <Drawer.Navigator 
-        initialRouteName="Home"
+        initialRouteName="Login"
         drawerContent={ props => <CustomDrawerContent {...props} /> }
       >
-        <Drawer.Screen  name="Home" component={HomeScreen} />
-        <Drawer.Screen  name="DailyInstallReport" component={DailyInstallReport} />
-        <Drawer.Screen  name="Profile" component={Profile} />
-        <Drawer.Screen  name="AddProject" component={AddProject} />
-        <Drawer.Screen  name="AddUser" component={AddUser} />
-        <Drawer.Screen  name="DeleteUser" component={DeleteUser} />
-        <Drawer.Screen  name="Login" component={Login} />
-        <Drawer.Screen  name="Submit" component={SubmissionPage} />
+        <Drawer.Screen  name="Home"               component={HomeScreen}          />
+        <Drawer.Screen  name="DailyInstallReport" component={DailyInstallReport}  />
+        <Drawer.Screen  name="Profile"            component={Profile}             />
+        <Drawer.Screen  name="AddProject"         component={AddProject}          />
+        <Drawer.Screen  name="AddUser"            component={AddUser}             />
+        <Drawer.Screen  name="DeleteUser"         component={DeleteUser}          />
+        <Drawer.Screen  name="Login"              component={Login}               />
 
       </Drawer.Navigator>
     </NavigationContainer>
@@ -59,7 +54,7 @@ function Main() {
 export default function App() {
   return(
     <Provider store={store}>
-    <Main />
+      <Main />
     </Provider>
   )
 }
