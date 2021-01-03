@@ -1,12 +1,10 @@
 import 'react-native-gesture-handler';
 import * as React from 'react';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStore } from 'redux'; 
-import { Provider } from 'react-redux'
-
 
 //NAVIGATION SETUP!-------------------------------------------------------
+
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { NavigationContainer } from '@react-navigation/native';
 
 const Drawer = createDrawerNavigator();
 
@@ -26,8 +24,13 @@ import Login from './src/screens/Login';
 
 //REDUX SETUP!------------------------------------------------------------
 
+import { Provider } from 'react-redux'
+import { createStore, applyMiddleware } from 'redux'; 
 import reducers from './src/redux/reducers'; 
-let store = createStore(reducers); 
+import reduxThunk from 'redux-thunk'; 
+
+//create store 
+let store = createStore(reducers, { }, applyMiddleware(reduxThunk)); 
 
 //------------------------------------------------------------------------
 

@@ -2,7 +2,11 @@ import { USERNAME_CHANGED, PASSWORD_CHANGED } from "../actions/actionTypes";
 
 const INITIAL_STATE = {
     username: '',
-    password: ''
+    password: '',
+    isLoading: false, 
+    isLoggedIn: false, 
+    error: '', 
+    user: {}
 }
 
 export default auth = (state=INITIAL_STATE, action) => {

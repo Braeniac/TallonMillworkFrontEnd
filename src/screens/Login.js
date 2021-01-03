@@ -8,18 +8,10 @@ import { useSelector, useDispatch } from 'react-redux';
 //login button
 import CustomButton from '../components/CustomButton'; 
 
-const onPress = () => {
-    console.log('pressed'); 
-}
-
-
 const Login = ()  => {
-
 
     const { username, password } = useSelector(state => state.auth); 
     const dispatch = useDispatch(); 
-
-    // const [password, setPassword] = useState('');
 
     return (
         <KeyboardAwareScrollView
@@ -64,7 +56,12 @@ const Login = ()  => {
            <View
                 style={styles.button}
            >
-                <CustomButton title="Login" onPress={onPress} />
+                <CustomButton 
+                    title="Login" 
+                    onPress={
+                        () => console.log('pressed')
+                    } 
+                />
            </View>
 
                 <Text>USERNAME: {username}</Text>
