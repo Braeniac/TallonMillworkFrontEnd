@@ -63,3 +63,16 @@ const loginUserFailed = (dispatch) => {
     }); 
 }
 
+//logout user 
+export const logoutUser = ({ navigation }) => {
+    return (dispatch) => {
+        logout(dispatch, navigation)
+    }
+}
+
+const logout = (dispatch, navigation) => {
+    dispatch({
+        type: LOGOUT_USER
+    }); 
+    navigation.navigate('Login'); 
+}

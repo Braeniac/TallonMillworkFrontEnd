@@ -52,6 +52,10 @@ export default auth = (state=INITIAL_STATE, action) => {
                 ...state,
                 token: action.payload
             }
+        case LOGOUT_USER:
+            return {
+                ...INITIAL_STATE
+            }
         default:
             return state; 
     }

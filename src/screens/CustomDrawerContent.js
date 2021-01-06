@@ -22,10 +22,9 @@ const CustomDrawerContent = ({ navigation }) => {
     const [username, setUsername] = useState(''); 
     const [isAdmin, setIsAdmin] = useState(true); 
 
+
     const dispatch = useDispatch(); 
 
-
-   
 
     return(
         <SafeAreaView style={{ flex : 1 }}>
@@ -47,7 +46,12 @@ const CustomDrawerContent = ({ navigation }) => {
                 <View
                     style={styles.logoutButton}
                 >
-                    <CustomButton title="Logout" onPress={() => dispatch(logoutUser(navigation)) } />
+                    <CustomButton 
+                        title="Logout" 
+                        onPress={() => 
+                            dispatch(logoutUser({ navigation }))
+                        } 
+                    />
                 </View>
 
             </ScrollView>
