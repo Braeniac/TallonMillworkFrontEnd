@@ -4,14 +4,28 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 
 //redux
 import { useSelector, useDispatch } from 'react-redux';
+import { loginUser } from '../redux/actions/authAction'; 
 
 //login button
 import CustomButton from '../components/CustomButton'; 
 
-const Login = ()  => {
+const Login = ({ navigation })  => {
 
-    const { username, password } = useSelector(state => state.auth); 
+    const { username, password, error, isLoggedIn, user } = useSelector(state => state.auth); 
     const dispatch = useDispatch(); 
+
+    console.log(user)
+
+    //authentication error message -- if user fails to sign in
+    const renderError = () => {
+        if (error) { 
+            return(
+                <View style={{ paddingTop: 10 }}>
+                    <Text style={{ color : 'red' }}>{error}</Text>
+                </View>
+            )
+        }
+    }
 
     return (
         <KeyboardAwareScrollView
@@ -31,7 +45,7 @@ const Login = ()  => {
                 placeholder="Username"
                 autoCapitalize="none"
                 autoCorrect={false}
-                onChangeText={text => dispatch({ type: 'username_changed', payload: text }) }
+                onChangeText={text => dispatch({ type: 'username_changed', payload: text })}
                 value={username}
             />
             
@@ -46,6 +60,8 @@ const Login = ()  => {
                 value={password}
             />
 
+            {renderError()}
+
             <TouchableOpacity 
                 style={styles.forgetPassword}
                 onPress={() => console.log('forget password')}    
@@ -58,14 +74,11 @@ const Login = ()  => {
            >
                 <CustomButton 
                     title="Login" 
-                    onPress={
-                        () => console.log('pressed')
-                    } 
+                    onPress={() => 
+                        dispatch(loginUser({ username, password }))
+                    }
                 />
            </View>
-
-                <Text>USERNAME: {username}</Text>
-                <Text>PASSWORD: {password}</Text>
 
         </View>
         </KeyboardAwareScrollView>
@@ -107,3 +120,4 @@ const styles = StyleSheet.create({
 
 
 export default Login; 
+

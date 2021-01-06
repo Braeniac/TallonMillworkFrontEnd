@@ -1,4 +1,4 @@
-import React, { useState } from 'react'; 
+import React, { useState, useEffect } from 'react'; 
 import {View, StyleSheet, Dimensions, SafeAreaView } from 'react-native'; 
 import CustomButton from '../components/CustomButton'; 
 import { ScrollView } from 'react-native-gesture-handler';
@@ -7,20 +7,36 @@ import Header from '../components/drawerNaviagtion/Header';
 import AdminUser from '../components/drawerNaviagtion/AdminUser';
 import RegularUser from '../components/drawerNaviagtion/RegularUser';
 
-const height = Dimensions.get('window').height; 
+//redux
+import { useSelector, useDispatch } from 'react-redux';
+import { logoutUser } from '../redux/actions/authAction'; 
+
+
+
    
 const CustomDrawerContent = ({ navigation }) => {
 
-    const [initials, setInitials] = useState('MS'); 
-    const [name, setName] = useState('Maninder Singh'); 
-    const [username, setUsername] = useState('ms14xe'); 
+
+    const [initials, setInitials] = useState(''); 
+    const [name, setName] = useState(''); 
+    const [username, setUsername] = useState(''); 
     const [isAdmin, setIsAdmin] = useState(true); 
+
+    const dispatch = useDispatch(); 
+
+
+   
 
     return(
         <SafeAreaView style={{ flex : 1 }}>
             <ScrollView>
-                
-                <Header initials={initials} name={name} username={username} role={isAdmin} />
+
+                {/* <Header 
+                    initials={initials} 
+                    name={name} 
+                    username={username} 
+                    role={isAdmin}
+                />  */}
 
                 {isAdmin ? 
                     <AdminUser navigation={navigation} />
@@ -31,7 +47,7 @@ const CustomDrawerContent = ({ navigation }) => {
                 <View
                     style={styles.logoutButton}
                 >
-                    <CustomButton title="Logout" />
+                    <CustomButton title="Logout" onPress={() => dispatch(logoutUser(navigation)) } />
                 </View>
 
             </ScrollView>

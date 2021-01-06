@@ -20,20 +20,6 @@ import AddUser from './src/screens/AddUser';
 import DeleteUser from './src/screens/DeleteUser';
 import Login from './src/screens/Login'; 
 
-//------------------------------------------------------------------------
-
-//REDUX SETUP!------------------------------------------------------------
-
-import { Provider } from 'react-redux'
-import { createStore, applyMiddleware } from 'redux'; 
-import reducers from './src/redux/reducers'; 
-import reduxThunk from 'redux-thunk'; 
-
-//create store 
-let store = createStore(reducers, { }, applyMiddleware(reduxThunk)); 
-
-//------------------------------------------------------------------------
-
 function Main() {
   return (
     <NavigationContainer>
@@ -41,18 +27,28 @@ function Main() {
         initialRouteName="Login"
         drawerContent={ props => <CustomDrawerContent {...props} /> }
       >
+        <Drawer.Screen  name="Login"              component={Login}               />
         <Drawer.Screen  name="Home"               component={HomeScreen}          />
         <Drawer.Screen  name="DailyInstallReport" component={DailyInstallReport}  />
         <Drawer.Screen  name="Profile"            component={Profile}             />
         <Drawer.Screen  name="AddProject"         component={AddProject}          />
         <Drawer.Screen  name="AddUser"            component={AddUser}             />
         <Drawer.Screen  name="DeleteUser"         component={DeleteUser}          />
-        <Drawer.Screen  name="Login"              component={Login}               />
 
       </Drawer.Navigator>
     </NavigationContainer>
   );
 }
+
+//REDUX SETUP!------------------------------------------------------------
+
+import { Provider } from 'react-redux'
+import { createStore, applyMiddleware } from 'redux'; 
+import rootreducer from './src/redux/reducers'; 
+import reduxThunk from 'redux-thunk'; 
+
+//create store 
+const store = createStore(rootreducer, { }, applyMiddleware(reduxThunk)); 
 
 export default function App() {
   return(
