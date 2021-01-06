@@ -4,13 +4,16 @@ import { View, Text, Image, TouchableOpacity, Platform, StyleSheet } from 'react
 
 import Menu from '../components/Menu';
 
+//redux
 import { useSelector, useDispatch } from 'react-redux';
-import { loginUser } from '../redux/actions/authAction'; 
 
 const HomeScreen = ({ navigation }) => {
 
     const [name, setName] = useState('Maninder'); 
+
+
     
+
 
 
     return (

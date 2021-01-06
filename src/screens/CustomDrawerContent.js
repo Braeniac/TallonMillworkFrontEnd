@@ -10,37 +10,36 @@ import RegularUser from '../components/drawerNaviagtion/RegularUser';
 //redux
 import { useSelector, useDispatch } from 'react-redux';
 import { logoutUser } from '../redux/actions/authAction'; 
-
-
-
    
 const CustomDrawerContent = ({ navigation }) => {
 
 
-    const [initials, setInitials] = useState(''); 
-    const [name, setName] = useState(''); 
-    const [username, setUsername] = useState(''); 
-    const [isAdmin, setIsAdmin] = useState(true); 
+
+    
 
 
+    const { isLoggedIn, user } = useSelector(state => state.auth); 
     const dispatch = useDispatch(); 
-
+    const [isAdmin, setIsAdmin] = useState(false); 
 
     return(
+       
         <SafeAreaView style={{ flex : 1 }}>
-            <ScrollView>
-
-                {/* <Header 
-                    initials={initials} 
-                    name={name} 
-                    username={username} 
-                    role={isAdmin}
-                />  */}
-
-                {isAdmin ? 
-                    <AdminUser navigation={navigation} />
-                : 
-                    <RegularUser navigation={navigation} />
+            { (!isLoggedIn) ? null :
+                
+                <ScrollView>
+                <Header 
+                    initials={`${user.fName.charAt(0)} ${user.lName.charAt(0)}`} 
+                    name={user.fName + " " + user.lName} 
+                    username={user.uname} 
+                    role={(user.role) ? true : false}
+                />
+    
+                {
+                    ((user.role) ? true : false) ? 
+                        <AdminUser navigation={navigation} />
+                    : 
+                        <RegularUser navigation={navigation} />
                 }
 
                 <View
@@ -53,9 +52,11 @@ const CustomDrawerContent = ({ navigation }) => {
                         } 
                     />
                 </View>
-
-            </ScrollView>
+                </ScrollView> 
+                
+            }
         </SafeAreaView>
+
     ); 
 
 }

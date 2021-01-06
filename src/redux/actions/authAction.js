@@ -21,12 +21,6 @@ export const passwordChanged = (text) => {
 
 //login user
 export const loginUser = ({ username, password, navigation }) => {
-
-    console.log(username)
-    console.log(password)
-    console.log(`Basic ${btoa(username + ":" + password)}`)
-    console.log(`http://localhost:8080/api/user/${username}`)
-
     return (dispatch) => { 
         dispatch({ type: LOGIN_USER })
         return axios.get(
@@ -43,7 +37,6 @@ export const loginUser = ({ username, password, navigation }) => {
     }
 }
 
-
 //login helper 
 const loginUserSuccess = (dispatch, response, username, password, navigation) => {
     dispatch({
@@ -56,6 +49,7 @@ const loginUserSuccess = (dispatch, response, username, password, navigation) =>
     }); 
     navigation.navigate('Home'); 
 }
+
 //login helper 
 const loginUserFailed = (dispatch) => {
     dispatch({
@@ -70,6 +64,7 @@ export const logoutUser = ({ navigation }) => {
     }
 }
 
+//logout helper 
 const logout = (dispatch, navigation) => {
     dispatch({
         type: LOGOUT_USER

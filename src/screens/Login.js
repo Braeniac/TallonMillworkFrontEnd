@@ -11,22 +11,8 @@ import CustomButton from '../components/CustomButton';
 
 const Login = ({ navigation })  => {
 
-    const { username, password, error, isLoggedIn, user, token, isLoading } = useSelector(state => state.auth); 
+    const { username, password, error } = useSelector(state => state.auth); 
     const dispatch = useDispatch(); 
-
-    console.log('username '  + username)
-
-    console.log('password ' + password)
-
-    console.log('Logged in ' + isLoggedIn)
-
-    console.log(user)
-
-    console.log('token ' + token)
-
-    console.log('Loading ' + isLoading)
-
-    console.log('error ' + error)
 
 
     //authentication error message -- if user fails to sign in

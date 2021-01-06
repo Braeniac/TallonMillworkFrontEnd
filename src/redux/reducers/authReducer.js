@@ -54,7 +54,14 @@ export default auth = (state=INITIAL_STATE, action) => {
             }
         case LOGOUT_USER:
             return {
-                ...INITIAL_STATE
+                ...state,
+                username: '',
+                password: '',
+                user : null,
+                isLoading: false, 
+                isLoggedIn: false, 
+                error: '',     
+                token: ''
             }
         default:
             return state; 
