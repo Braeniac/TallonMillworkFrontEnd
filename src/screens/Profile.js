@@ -1,41 +1,83 @@
-import React from 'react'; 
-import { View, Text, Image, TouchableOpacity, Platform, StyleSheet, SafeAreaView } from 'react-native'; 
+import React, { useState } from 'react'; 
+import { View, Text, Modal, Image, Alert, TouchableOpacity, Platform, StyleSheet, SafeAreaView } from 'react-native'; 
 import { ScrollView } from 'react-native-gesture-handler';
 
 import Menu from '../components/Menu';
-import ChangePassword from '../components/updateProfile/ChangePassword'; 
-import ChangeUsername from '../components/updateProfile/ChangeUsername'; 
+import BasicInformation from '../components/updateProfile/BasicInformation'; 
+import UsernameModal from '../components/updateProfile/UsernameModal'; 
+import PasswordModal from '../components/updateProfile/PasswordModal'; 
+
+import right from '../assets/icons/right.png'; 
+
+//redux
+import { useSelector, useDispatch } from 'react-redux';
 
 const Profile = ({ navigation }) => {
 
+
+
+    const { user, isLoggedIn } = useSelector(state => state.auth); 
+    const dispatch = useDispatch(); 
+
+
+    const [changeUsernameModal, setChangeUserModal] = useState(false); 
+    const [changePasswordModal, setPasswordModal] = useState(false); 
+
     return (
         <SafeAreaView>
-            <ScrollView>
-            <View style={styles.container}>
-                <Menu navigation={navigation} />
-                <Text style={styles.title}>Profile</Text>    
+            { (!isLoggedIn) ? null :
+                <ScrollView>
+                <View style={styles.container}>
+                    <Menu navigation={navigation} />
+                    <Text style={styles.title}>Profile</Text> 
+
+                    <BasicInformation 
+                        user={user}
+                    />
+
+                    <TouchableOpacity
+                        style={styles.button}
+                        onPress={() => {
+                            setChangeUserModal(!changeUsernameModal)
+                        }}
+                    >
+                        <View style={{ flexDirection: 'row',  justifyContent:'space-between'}}>
+                            <Text style={styles.buttonText}>Change username</Text>
+                            <Image 
+                                source={right}
+                            />
+                        </View>
+                    </TouchableOpacity>
+
+                    <UsernameModal
+                        modalVisible={changeUsernameModal}
+                        setModalVisable={setChangeUserModal}
+                        title="Change Username"
+                    />
                 
-                
-                
-                
-                
-                
-                
-                
-                
-                {/* <View>
-                    <ChangeUsername />
+                    <TouchableOpacity
+                        style={styles.button}
+                        onPress={() => {
+                            setPasswordModal(!changePasswordModal)
+                        }}
+                    >
+                        <View style={{ flexDirection: 'row',  justifyContent:'space-between'}}>
+                            <Text style={styles.buttonText}>Change Password</Text>
+                            <Image 
+                                source={right}
+                            />
+                        </View>
+                    </TouchableOpacity>
+
+                    <PasswordModal
+                        modalVisible={changePasswordModal}
+                        setModalVisable={setPasswordModal}
+                        title="Change Password"
+                    />
+
                 </View>
-                <View>
-                    <ChangePassword />
-                </View> */}
-            
-            
-            
-            
-            
-            </View>
-            </ScrollView>
+                </ScrollView>
+            }
         </SafeAreaView>
     );
 }
@@ -53,6 +95,16 @@ const styles = StyleSheet.create({
         fontWeight: '200',
         color: '#333'
     },  
+    button: {
+        marginTop: 30,
+        borderTopWidth: 1,
+        borderBottomWidth: 1,
+        borderColor: 'lightgray',
+        paddingVertical: 15
+    },
+    buttonText: {
+        fontSize: 20
+    }
 })
 
 export default Profile; 

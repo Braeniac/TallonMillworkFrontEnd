@@ -13,14 +13,8 @@ import { logoutUser } from '../redux/actions/authAction';
    
 const CustomDrawerContent = ({ navigation }) => {
 
-
-
-    
-
-
     const { isLoggedIn, user } = useSelector(state => state.auth); 
     const dispatch = useDispatch(); 
-    const [isAdmin, setIsAdmin] = useState(false); 
 
     return(
        
@@ -53,7 +47,7 @@ const CustomDrawerContent = ({ navigation }) => {
                     />
                 </View>
                 </ScrollView> 
-                
+
             }
         </SafeAreaView>
 

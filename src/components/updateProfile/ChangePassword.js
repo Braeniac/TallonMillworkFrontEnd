@@ -3,19 +3,15 @@ import { View, Text, TextInput, StyleSheet } from 'react-native';
 
 import CustomButton from '../CustomButton'; 
 
-const onPress = () => {
-   
-}
 
-const ChangePassword = () => {
+const ChangePassword = ({ onPress }) => {
 
     const [currentPassword, setCurrentPassword] = useState(''); 
     const [newPassword, setNewPassword] = useState('');
     const [verifyPassword, setVerifyPassword] = useState(''); 
 
     return(
-        <View>
-            <Text style={styles.title}>Change Password:</Text>
+        <View style={{ marginHorizontal: 20 }}>
             <TextInput
                 style={styles.textInput}
                 placeholder="Current Password"

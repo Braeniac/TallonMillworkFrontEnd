@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, StyleSheet, SafeAreaView, Modal, Alert,TouchableOpacity, Dimensions } from 'react-native'; 
 import ImagePicker, { openCamera } from 'react-native-image-crop-picker';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'; 
-import { ScrollView } from 'react-native-gesture-handler';
 
 //camera -- upload pre/post images 
 import Camera from '../components/dailyInstallReport/Camera';
@@ -142,6 +141,14 @@ const DailyInstallReport = ({ navigation }) => {
     const [siteSupervisorModal, setSiteSuperVisorModal] = useState(false); 
     //modal completed by
     const [completedByModal, setCompletedByModal] = useState(false);
+
+
+
+    //build payload
+
+
+    
+
 
 
     // CAMERA --------------------------------------------------------------------------------

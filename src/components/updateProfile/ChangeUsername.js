@@ -3,18 +3,14 @@ import { View, Text, TextInput, StyleSheet } from 'react-native';
 
 import CustomButton from '../CustomButton'; 
 
-const onPress = () => {
-    console.log('Change Username')
-}
 
-const ChangeUsername = () => {
+const ChangeUsername = ({ onPress }) => {
 
     const [currentUsername, setCurrentUsername] = useState(''); 
     const [newUsername, setNewUsername] = useState('');
 
     return(
-        <View>
-            <Text style={styles.title}>Change Username:</Text>
+        <View style={{ marginHorizontal: 20 }}>
             <TextInput
                 style={styles.textInput}
                 placeholder="Current Username"
