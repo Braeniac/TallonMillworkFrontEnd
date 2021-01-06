@@ -47,6 +47,11 @@ export default auth = (state=INITIAL_STATE, action) => {
                 isLoading : true, 
                 error : ''
             }
+        case SET_TOKEN: 
+            return {
+                ...state,
+                token: action.payload
+            }
         default:
             return state; 
     }

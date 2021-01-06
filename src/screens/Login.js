@@ -11,10 +11,14 @@ import CustomButton from '../components/CustomButton';
 
 const Login = ({ navigation })  => {
 
-    const { username, password, error, isLoggedIn, user } = useSelector(state => state.auth); 
+    const { username, password, error, isLoggedIn, user, token } = useSelector(state => state.auth); 
     const dispatch = useDispatch(); 
 
     console.log(user)
+
+    console.log(isLoggedIn)
+
+    console.log(token)
 
     //authentication error message -- if user fails to sign in
     const renderError = () => {
@@ -75,7 +79,7 @@ const Login = ({ navigation })  => {
                 <CustomButton 
                     title="Login" 
                     onPress={() => 
-                        dispatch(loginUser({ username, password }))
+                        dispatch(loginUser({ username, password, navigation }))
                     }
                 />
            </View>

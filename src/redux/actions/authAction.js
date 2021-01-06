@@ -20,7 +20,7 @@ export const passwordChanged = (text) => {
 }
 
 //login user
-export const loginUser = ({ username, password }) => {
+export const loginUser = ({ username, password, navigation }) => {
 
     console.log(username)
     console.log(password)
@@ -38,18 +38,23 @@ export const loginUser = ({ username, password }) => {
                 }
             }
         )
-        .then(response => loginUserSuccess(dispatch, response))
-        .catch(err => console.log(err))
+        .then(response => loginUserSuccess(dispatch, response, username, password, navigation))
+        .catch(() => loginUserFailed(dispatch))
     }
 }
 
 
 //login helper 
-const loginUserSuccess = (dispatch, response) => {
+const loginUserSuccess = (dispatch, response, username, password, navigation) => {
     dispatch({
         type: LOGIN_USER_SUCCESS,
         payload: response.data
     }); 
+    dispatch({
+        type: SET_TOKEN,
+        payload: `Basic ${btoa(username + ":" + password)}`
+    }); 
+    navigation.navigate('Home'); 
 }
 //login helper 
 const loginUserFailed = (dispatch) => {
