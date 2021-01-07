@@ -5,6 +5,11 @@ import { View, Text, TextInput, TouchableOpacity, Platform, StyleSheet } from 'r
 import Menu from '../components/Menu';
 import CustomButton from '../components/CustomButton';
 
+
+//redux 
+import { useSelector, useDispatch } from 'react-redux';
+import { deleteUser } from '../redux/actions/userAction'; 
+
 const onPress = () => {
     console.log("delete user");
 }
@@ -12,6 +17,9 @@ const onPress = () => {
 const DeleteUser = ({ navigation }) => {
 
     const [uname, setUname] = useState('');
+
+    const { token } = useSelector(state => state.auth); 
+    const dispatch = useDispatch(); 
 
     return (
         <View style={styles.container}>
@@ -23,14 +31,19 @@ const DeleteUser = ({ navigation }) => {
                 placeholder="Username"
                 autoCapitalize="none"
                 autoCorrect={false}
-                onChangeText={text => setUName(text)}
+                onChangeText={text => setUname(text)}
                 value={uname}           
            />
 
            <View
                 style={styles.button}
            >
-               <CustomButton title="Delete User" onPress={onPress} />
+               <CustomButton 
+                    title="Delete User" 
+                    onPress={ () => {
+                        dispatch(deleteUser(token, uname)); 
+                    }} 
+                />
            </View>
 
         </View>
