@@ -1,26 +1,46 @@
-import React, { useState } from 'react'; 
-import { View, Text, TextInput, TouchableOpacity, Platform, StyleSheet } from 'react-native'; 
-
+import React, { useState, useEffect } from 'react'; 
+import { View, Text, TextInput, TouchableOpacity, Platform, StyleSheet, Alert } from 'react-native'; 
 
 import Menu from '../components/Menu';
 import CustomButton from '../components/CustomButton';
-
 
 //redux 
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteUser } from '../redux/actions/userAction'; 
 
-const onPress = () => {
-    console.log("delete user");
-}
-
 const DeleteUser = ({ navigation }) => {
 
     const [uname, setUname] = useState('');
 
-    const { token } = useSelector(state => state.auth); 
+    const { token } = useSelector(state => state.auth);
+    const { error, success, isDeleting } = useSelector(state => state.user); 
     const dispatch = useDispatch(); 
 
+    console.log(error)
+    console.log(success)
+    console.log(isDeleting)
+
+
+
+    useEffect(() => {
+        dispatch({ type : 'reset_user_state' }); 
+    }, []);
+
+    //authentication error message -- if user fails to sign in
+    const renderError = () => {
+        if (error) { 
+            return(
+                <View style={{ paddingTop: 10 }}>
+                    <Text style={{ color : 'red' }}>{error}</Text>
+                </View>
+            )
+        }
+        if (success) {
+            Alert.alert("User has been removed!");
+        }
+    }
+
+    
     return (
         <View style={styles.container}>
            <Menu navigation={navigation} />
@@ -35,13 +55,16 @@ const DeleteUser = ({ navigation }) => {
                 value={uname}           
            />
 
+           {renderError()}
+
            <View
                 style={styles.button}
            >
                <CustomButton 
                     title="Delete User" 
                     onPress={ () => {
-                        dispatch(deleteUser(token, uname)); 
+                        dispatch(deleteUser(token, uname)),
+                        setUname(''); 
                     }} 
                 />
            </View>

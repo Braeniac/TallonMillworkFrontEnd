@@ -26,11 +26,12 @@ const CustomDrawerContent = ({ navigation }) => {
                     initials={`${user.fName.charAt(0)} ${user.lName.charAt(0)}`} 
                     name={user.fName + " " + user.lName} 
                     username={user.uname} 
-                    role={(user.role) ? true : false}
+                    role={(user.role === 'ADMIN') ? true : false}
                 />
     
                 {
-                    ((user.role) ? true : false) ? 
+                    ((user.role === 
+                        'ADMIN') ? true : false) ? 
                         <AdminUser navigation={navigation} />
                     : 
                         <RegularUser navigation={navigation} />

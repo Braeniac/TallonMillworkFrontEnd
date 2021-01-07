@@ -3,7 +3,10 @@ import axios from 'axios';
 import { 
     ADD_NEW_USER,
     USER_SUCCESSFULLY_ADDED,
-    FAILED_TO_ADD_USER
+    FAILED_TO_ADD_USER,
+    DELETE_USER,
+    DELETE_USER_SUCCESS,
+    DELETE_USER_FAIL 
 } from './actionTypes'
 
 // //add user 
@@ -42,6 +45,7 @@ export const deleteUser = (token, uname) => {
     console.log(`http://localhost:8080/api/user/${uname}`)
 
     return (dispatch) => {
+        dispatch({ type : DELETE_USER })
         return axios.delete(
             //`http://10.0.2.2:8080/api/user/${uname}`,   //--android
             `http://localhost:8080/api/user/${uname}`,
@@ -53,10 +57,20 @@ export const deleteUser = (token, uname) => {
                     "Authorization" : token
                 }
             }
-        ).then(res => console.log(res))
-        .catch(err => console.log(err))
+        ).then(() => deleteUserSuccess(dispatch))
+        .catch(() => deleteUserFailed(dispatch))
     }
 }
 
+//delete user helper --success
+const deleteUserSuccess = (dispatch) => {
+    dispatch({
+        type: DELETE_USER_SUCCESS
+    }); 
+}
 
-
+const deleteUserFailed = (dispatch) => {
+    dispatch({
+        type: DELETE_USER_FAIL
+    })
+}

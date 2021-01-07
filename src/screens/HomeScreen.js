@@ -14,8 +14,6 @@ const HomeScreen = ({ navigation }) => {
     const { isLoading, error, success, project, allProjects } = useSelector(state => state.project); 
     const dispatch = useDispatch(); 
 
-    console.log(allProjects)
-
     return (
         <View style={styles.container}>
             <Menu navigation={navigation} />
@@ -33,7 +31,7 @@ const HomeScreen = ({ navigation }) => {
             
             <TouchableOpacity
             onPress={
-                    () => dispatch(activeProject(2, token))
+                    () => dispatch(activeProject(4, token))
                 }
             >
                 <Text>get A projects</Text>
