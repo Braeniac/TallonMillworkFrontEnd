@@ -1,13 +1,28 @@
-import { PROJECT_SUCCESSFULLY_ADDED, FAILED_TO_ADD_PROJECT, ADD_NEW_PROJECT } from "../actions/actionTypes";
+import { 
+    PROJECT_SUCCESSFULLY_ADDED, 
+    FAILED_TO_ADD_PROJECT, 
+    ADD_NEW_PROJECT, 
+    GET_PROJECTS,
+    PROJECTS_RECEIVED,
+    PROJECTS_NOT_RECEIVED
+} from "../actions/actionTypes";
 
 const INITIAL_STATE = {
     isLoading: false, 
     error: '',
-    success: false
+    success: false,
+    project : null,
+    allProjects : null, 
+    isFetching: 'false'
 }
 
 export default project = (state=INITIAL_STATE, action) => {
     switch(action.type) {
+        case ADD_NEW_PROJECT: 
+            return {
+                ...state,
+                isLoading : true
+            }
         case PROJECT_SUCCESSFULLY_ADDED: 
             return {
                 ...state,
@@ -18,13 +33,30 @@ export default project = (state=INITIAL_STATE, action) => {
         case FAILED_TO_ADD_PROJECT: 
             return {
                 ...state,
-                error: 'Failed to add project, Please try again...',
+                error: 'Failed to add project. Please try again!',
                 isLoading: false
             }
-        case ADD_NEW_PROJECT: 
+        case GET_PROJECTS: 
             return {
                 ...state,
-                isLoading: true
+                success : false,
+                isFetching : true,
+            }
+        case PROJECTS_RECEIVED: 
+            return {
+                ...state,
+                allProjects : action.payload,
+                isFetching : false, 
+                success : true
+            }
+        case PROJECTS_NOT_RECEIVED: 
+            return {
+                ...state,
+                ifFetching : false,
+                error : 'Failed to retrieve project(s). Please try again!',
+                isLoading: false, 
+                success: false,
+                allProjects : null, 
             }
         default: 
             return state; 

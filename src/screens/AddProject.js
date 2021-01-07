@@ -11,12 +11,12 @@ import { addNewProject } from '../redux/actions/projectAction';
 
 const AddProject = ({ navigation }) => {
 
+    //new project
     const [project, setProject] = useState('');
 
+    //redux
     const { token } = useSelector(state => state.auth); 
     const { error } = useSelector(state => state.project); 
-
-    
     const dispatch = useDispatch(); 
 
 
@@ -31,8 +31,6 @@ const AddProject = ({ navigation }) => {
         }
     }
 
-
-  
     return (
         <View style={styles.container}>
              <Menu navigation={navigation} />
@@ -51,25 +49,12 @@ const AddProject = ({ navigation }) => {
              <View
                 style={styles.button}
              >
-                 {/* <CustomButton 
+                <CustomButton 
                     title="Add Project" 
-                    onPress={() => {
-                        console.log('button pressed' + project)
-                        
-                        dispatch(addNewProject({ project,  token })) 
-                            
-                        
-                        
+                    onPress={() => {    
+                        dispatch(addNewProject(project, token))
                     }}
-                /> */}
-
-                <TouchableOpacity
-                    onPress={ () =>  dispatch(addNewProject(project, token)) }
-                >
-
-                    <Text>Add Project</Text>
-
-                </TouchableOpacity>
+                />
 
              </View>
         </View>
