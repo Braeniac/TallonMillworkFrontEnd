@@ -1,18 +1,38 @@
-import React, { useState } from 'react'; 
+import React, { useState, useEffect } from 'react'; 
 import { View, Text, TextInput, TouchableOpacity, Platform, StyleSheet } from 'react-native'; 
 
 
 import Menu from '../components/Menu'; 
 import CustomButton from '../components/CustomButton';
 
-const onPress = () => {
-    console.log('Add project'); 
-}
+//redux
+import { useSelector, useDispatch } from 'react-redux';
+import { addNewProject } from '../redux/actions/projectAction'; 
 
 const AddProject = ({ navigation }) => {
 
-    const [project, setProject] = useState(''); 
+    const [project, setProject] = useState('');
 
+    const { token } = useSelector(state => state.auth); 
+    const { error } = useSelector(state => state.project); 
+
+    
+    const dispatch = useDispatch(); 
+
+
+    //authentication error message -- if user fails to sign in
+    const renderError = () => {
+        if (error) { 
+            return(
+                <View style={{ paddingTop: 10 }}>
+                    <Text style={{ color : 'red' }}>{error}</Text>
+                </View>
+            )
+        }
+    }
+
+
+  
     return (
         <View style={styles.container}>
              <Menu navigation={navigation} />
@@ -25,10 +45,32 @@ const AddProject = ({ navigation }) => {
                 onChangeText={text => setProject(text)}
                 value={project}
              />
+
+             {renderError()}
+
              <View
                 style={styles.button}
              >
-                 <CustomButton title="Add Project" onPress={onPress}/>
+                 {/* <CustomButton 
+                    title="Add Project" 
+                    onPress={() => {
+                        console.log('button pressed' + project)
+                        
+                        dispatch(addNewProject({ project,  token })) 
+                            
+                        
+                        
+                    }}
+                /> */}
+
+                <TouchableOpacity
+                    onPress={ () =>  dispatch(addNewProject(project, token)) }
+                >
+
+                    <Text>Add Project</Text>
+
+                </TouchableOpacity>
+
              </View>
         </View>
     );

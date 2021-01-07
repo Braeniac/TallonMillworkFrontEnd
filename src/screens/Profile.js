@@ -14,13 +14,13 @@ import { useSelector, useDispatch } from 'react-redux';
 
 const Profile = ({ navigation }) => {
 
-
-
+    //redux 
     const { user, isLoggedIn } = useSelector(state => state.auth); 
     const dispatch = useDispatch(); 
 
-
+    //username modal
     const [changeUsernameModal, setChangeUserModal] = useState(false); 
+    //password modal 
     const [changePasswordModal, setPasswordModal] = useState(false); 
 
     return (
@@ -34,6 +34,8 @@ const Profile = ({ navigation }) => {
                     <BasicInformation 
                         user={user}
                     />
+
+                    <Text style={styles.subtitle}>Update Information</Text>
 
                     <TouchableOpacity
                         style={styles.button}
@@ -95,6 +97,12 @@ const styles = StyleSheet.create({
         fontWeight: '200',
         color: '#333'
     },  
+    subtitle: {
+        fontWeight: 'bold',
+        fontSize: 20,
+        borderColor: 'lightgray',
+        paddingTop: 20
+    },
     button: {
         marginTop: 30,
         borderTopWidth: 1,

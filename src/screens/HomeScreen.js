@@ -9,7 +9,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 const HomeScreen = ({ navigation }) => {
 
-    const [name, setName] = useState('Maninder'); 
+    
 
 
     
