@@ -1,22 +1,47 @@
-import React, { useState } from 'react'; 
+import React, { useState, useEffect } from 'react'; 
 import { View, Text, TextInput, Image, TouchableOpacity, Platform, StyleSheet } from 'react-native'; 
+import { useIsFocused } from '@react-navigation/native'
 
 import Menu from '../components/Menu';
 import CustomButton from '../components/CustomButton';
 
-
-const onPress = () => {
-    console.log("add user")
-}
+//redux
+import { useSelector, useDispatch } from 'react-redux';
+import { addUser } from '../redux/actions/userAction'; 
 
 const AddUser = ({ navigation }) => {
 
+    //user input 
     const [fname, setFName] = useState('');
     const [lname, setLName] = useState('');
     const [uname, setUName] = useState(''); 
     const [role, setRole] = useState(''); 
     const [defaultPassowrd, setDefaultPassword] = useState('');
 
+    //redux 
+    const { token } = useSelector(state => state.auth); 
+    const { error } = useSelector(state => state.user); 
+  
+    const dispatch = useDispatch(); 
+
+    const isFocused = useIsFocused()
+
+    useEffect(() => {
+        //Update the state you want to be updated
+        dispatch({ type : 'reset_user_state' })
+    } , [isFocused])
+    
+    //authentication error message -- if user fails to sign in
+    const renderError = () => {
+        if (error) { 
+            return(
+              <View style={{ paddingTop: 10 }}>
+                  <Text style={{ color : 'red' }}>{error}</Text>
+               </View>
+            )
+        }
+    }
+  
     return (
         <View style={styles.container}>
           <Menu navigation={navigation} />
@@ -62,11 +87,24 @@ const AddUser = ({ navigation }) => {
             onChangeText={text => setDefaultPassword(text)}
             value={defaultPassowrd}
           />
+
+          {renderError()}
           
           <View
             style={styles.button}
           >
-                <CustomButton title="Add New User" onPress={onPress} />
+                <CustomButton 
+                  title="Add New User" 
+                  onPress={() => {
+                    dispatch(
+                      addUser(token, fname, lname, uname, role.toUpperCase(), defaultPassowrd)); 
+                      setFName(''); 
+                      setLName(''); 
+                      setUName(''); 
+                      setRole(''); 
+                      setDefaultPassword(''); 
+                  }} 
+                />
           </View>
           
         </View>

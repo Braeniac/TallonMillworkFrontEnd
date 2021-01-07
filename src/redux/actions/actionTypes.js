@@ -17,6 +17,13 @@ export const PROJECTS_RECEIVED          = 'projects_received';
 export const PROJECTS_NOT_RECEIVED      = 'projects_not_received'; 
 
 //user
+
+//add new user
+export const ADD_NEW_USER               = 'add_new_user'; 
+export const USER_SUCCESSFULLY_ADDED    = 'user_successfully_added';
+export const FAILED_TO_ADD_USER         = 'failed_to_add_user'; 
+
+//delete user 
 export const DELETE_USER                = 'delete_user'; 
 export const DELETE_USER_SUCCESS        = 'delete_user_success'; 
 export const DELETE_USER_FAIL           = 'delete_user_fail'; 

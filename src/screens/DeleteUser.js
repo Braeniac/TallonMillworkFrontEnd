@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'; 
 import { View, Text, TextInput, TouchableOpacity, Platform, StyleSheet, Alert } from 'react-native'; 
+import { useIsFocused } from '@react-navigation/native'
 
 import Menu from '../components/Menu';
 import CustomButton from '../components/CustomButton';
@@ -20,12 +21,6 @@ const DeleteUser = ({ navigation }) => {
     console.log(success)
     console.log(isDeleting)
 
-
-
-    useEffect(() => {
-        dispatch({ type : 'reset_user_state' }); 
-    }, []);
-
     //authentication error message -- if user fails to sign in
     const renderError = () => {
         if (error) { 
@@ -34,13 +29,17 @@ const DeleteUser = ({ navigation }) => {
                     <Text style={{ color : 'red' }}>{error}</Text>
                 </View>
             )
-        }
-        if (success) {
-            Alert.alert("User has been removed!");
-        }
+        } 
     }
 
-    
+    const isFocused = useIsFocused()
+
+    useEffect(() => {
+        //Update the state you want to be updated
+        dispatch({ type : 'reset_user_state' })
+    } , [isFocused])
+
+
     return (
         <View style={styles.container}>
            <Menu navigation={navigation} />

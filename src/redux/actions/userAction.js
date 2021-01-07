@@ -10,31 +10,31 @@ import {
 } from './actionTypes'
 
 // //add user 
-// export const addUser = (token, fName, lName, uname, role, password) => {
-//     return (dispatch) => {
-//         dispatch({ type : ADD_NEW_USER })
-//         return axios.post(
-//             //'http://10.0.2.2:8080/api/user',  // --android 
-//             'http://localhost:8080/api/user',
-//             {
-//                 "fName" : fName, 
-//                 "lName" : lName,
-//                 "uname" : uname,
-//                 "role"  : role,
-//                 "password" : password
-//             },
-//             {
-//                 headers: {
-//                     "Authorization" : token
-//                 }
-//             }
-//         ).then(res => console.log(res))
-//         .catch(err => console.log(err))
-//     }
-// }
-
-
-
+export const addUser = (token, fName, lName, uname, role, password) => {
+    return (dispatch) => {
+        dispatch({ type : ADD_NEW_USER })
+        return axios.post(
+            //'http://10.0.2.2:8080/api/user',  // --android 
+            'http://localhost:8080/api/user',
+            {
+                "fName" : fName, 
+                "lName" : lName,
+                "uname" : uname,
+                "role"  : role,
+                "password" : password,
+                "active": true,
+                "recoveryAnswer": "",
+                "recoveryQuestion": "" 
+            },
+            {
+                headers: {
+                    "Authorization" : token
+                }
+            }
+        ).then(res => console.log(res))
+        .catch(err => console.log(err))
+    }
+}
 
 
 //delete user 
