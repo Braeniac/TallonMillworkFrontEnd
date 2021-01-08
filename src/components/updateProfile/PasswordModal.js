@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Modal, Alert, StyleSheet, Dimensions, Platform } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'; 
 
-import ChangePassword from './ChangePassword'; 
+import UpdateQuesAns from './UpdateQuesAns'; 
 
 const PasswordModal = ({ modalVisible, setModalVisable, title }) => {
 
@@ -29,7 +29,7 @@ const PasswordModal = ({ modalVisible, setModalVisable, title }) => {
                     >
                     <View>
                         
-                    <ChangePassword
+                    <UpdateQuesAns
                         onPress={() => setModalVisable(!modalVisible)}
                     />
                     
