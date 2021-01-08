@@ -71,3 +71,27 @@ const logout = (dispatch, navigation) => {
     }); 
     navigation.navigate('Login'); 
 }
+
+
+//-----does not work!----
+//change user information -- first name, last name, and password 
+export const updateUserInformation = (fName, lName, password, token) => {
+
+    return (dispatch) => {
+        return axios.put(
+            // 'http://10.0.2.2:8080/api/user', //--android 
+            'http://localhost:8080/api/user',
+            {
+                "fName" : fName,
+                "lName" : lName,
+                "password" : password 
+            },
+            {
+                headers: {
+                    "Authorization" : token
+                }
+            }
+        ).then(res => console.log(res))
+        .catch(err => console.log(err))
+    }
+}

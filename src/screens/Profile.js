@@ -10,13 +10,13 @@ import PasswordModal from '../components/updateProfile/PasswordModal';
 import right from '../assets/icons/right.png'; 
 
 //redux
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 const Profile = ({ navigation }) => {
 
     //redux 
     const { user, isLoggedIn } = useSelector(state => state.auth); 
-    const dispatch = useDispatch(); 
+   
 
     //username modal
     const [changeUsernameModal, setChangeUserModal] = useState(false); 
@@ -44,17 +44,19 @@ const Profile = ({ navigation }) => {
                         }}
                     >
                         <View style={{ flexDirection: 'row',  justifyContent:'space-between'}}>
-                            <Text style={styles.buttonText}>Change username</Text>
+                            <Text style={styles.buttonText}>Change User Information</Text>
                             <Image 
                                 source={right}
                             />
                         </View>
                     </TouchableOpacity>
 
+                    {/* change user information */}
+
                     <UsernameModal
                         modalVisible={changeUsernameModal}
                         setModalVisable={setChangeUserModal}
-                        title="Change Username"
+                        title="Change User Information"
                     />
                 
                     <TouchableOpacity
@@ -63,18 +65,21 @@ const Profile = ({ navigation }) => {
                             setPasswordModal(!changePasswordModal)
                         }}
                     >
-                        <View style={{ flexDirection: 'row',  justifyContent:'space-between'}}>
-                            <Text style={styles.buttonText}>Change Password</Text>
+                        <View style={{ flexDirection: 'row', justifyContent:'space-between'}}>
+                            <Text style={styles.buttonText}>Update Recovery Question/Answer</Text>
                             <Image 
                                 source={right}
                             />
                         </View>
                     </TouchableOpacity>
 
+
+                    {/* update recovery question/answer */}
+
                     <PasswordModal
                         modalVisible={changePasswordModal}
                         setModalVisable={setPasswordModal}
-                        title="Change Password"
+                        title="Update Recovery Question"
                     />
 
                 </View>

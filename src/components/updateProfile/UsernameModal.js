@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Modal, Alert, StyleSheet, Dimensions, Platform } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'; 
 
-import ChangeUsername from './ChangeUsername'; 
+import UserInformation from './UserInformation'; 
 
 const UsernameModal = ({ modalVisible, setModalVisable, title }) => {
 
@@ -29,7 +29,7 @@ const UsernameModal = ({ modalVisible, setModalVisable, title }) => {
                     >
                     <View>
                         
-                    <ChangeUsername
+                    <UserInformation
                         onPress={() => setModalVisable(!modalVisible)}
                     />
 

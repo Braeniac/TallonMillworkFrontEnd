@@ -31,8 +31,8 @@ export const addUser = (token, fName, lName, uname, role, password) => {
                     "Authorization" : token
                 }
             }
-        ).then(res => console.log(res))
-        .catch(err => console.log(err))
+        ).then(() => dispatch({ type : USER_SUCCESSFULLY_ADDED }))
+        .catch(() => dispatch({ type : FAILED_TO_ADD_USER }))
     }
 }
 

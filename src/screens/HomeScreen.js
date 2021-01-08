@@ -10,13 +10,18 @@ import { useSelector, useDispatch } from 'react-redux';
 
 const HomeScreen = ({ navigation }) => {
 
-    const { token } = useSelector(state => state.auth)
+    const { token, user, isLoggedIn } = useSelector(state => state.auth)
     const { isLoading, error, success, project, allProjects } = useSelector(state => state.project); 
     const dispatch = useDispatch(); 
 
     return (
+     
         <View style={styles.container}>
-            <Menu navigation={navigation} />
+        {!(isLoggedIn) ? null : 
+            <View>
+           
+                <Menu navigation={navigation} />
+                <Text style={styles.welcome}>Welcome back, {user.fName}! </Text>
 
 
 
@@ -40,11 +45,8 @@ const HomeScreen = ({ navigation }) => {
 
 
 
-
-
-
-
-
+            </View>
+        }
         </View>
     );
 }
@@ -52,6 +54,10 @@ const HomeScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
     container: {
         marginLeft: 20,
+    },
+    welcome: {
+        textAlign: 'center',
+        fontSize: 30
     },
     title: {
         textAlign: 'center',

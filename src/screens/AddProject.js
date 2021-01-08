@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'; 
 import { View, Text, TextInput, TouchableOpacity, Platform, StyleSheet } from 'react-native'; 
+import { useIsFocused } from '@react-navigation/native'
 
 
 import Menu from '../components/Menu'; 
@@ -19,6 +20,12 @@ const AddProject = ({ navigation }) => {
     const { error } = useSelector(state => state.project); 
     const dispatch = useDispatch(); 
 
+    const isFocused = useIsFocused()
+
+    useEffect(() => {
+        //Update the state you want to be updated
+        dispatch({ type : 'reset_project_state' })
+    } , [isFocused])
 
     //authentication error message -- if user fails to sign in
     const renderError = () => {
@@ -53,6 +60,7 @@ const AddProject = ({ navigation }) => {
                     title="Add Project" 
                     onPress={() => {    
                         dispatch(addNewProject(project, token))
+                        setProject(''); 
                     }}
                 />
 

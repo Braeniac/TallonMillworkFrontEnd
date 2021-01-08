@@ -32,9 +32,9 @@ const styles = StyleSheet.create({
     },
     initials: {
         backgroundColor: '#333',
-        width: 150, 
-        height: 150, 
-        borderRadius: 20,
+        width: 160, 
+        height: 160, 
+        borderRadius: 160/2,
         justifyContent: 'center'
     },
     initialsText: {

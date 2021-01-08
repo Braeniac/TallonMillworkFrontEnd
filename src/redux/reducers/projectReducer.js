@@ -4,14 +4,14 @@ import {
     ADD_NEW_PROJECT, 
     GET_PROJECTS,
     PROJECTS_RECEIVED,
-    PROJECTS_NOT_RECEIVED
+    PROJECTS_NOT_RECEIVED,
+    RESET_PROJECT_STATE
 } from "../actions/actionTypes";
 
 const INITIAL_STATE = {
     isLoading: false, 
     error: '',
     success: false,
-    project : null,
     allProjects : null, 
     isFetching: 'false'
 }
@@ -57,6 +57,13 @@ export default project = (state=INITIAL_STATE, action) => {
                 isLoading: false, 
                 success: false,
                 allProjects : null, 
+            }
+        case RESET_PROJECT_STATE: 
+            return {
+                isLoading: false, 
+                error: '',
+                success: false,
+                isFetching: 'false'
             }
         default: 
             return state; 
