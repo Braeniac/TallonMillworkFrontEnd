@@ -17,10 +17,6 @@ const DeleteUser = ({ navigation }) => {
     const { error, success, isDeleting } = useSelector(state => state.user); 
     const dispatch = useDispatch(); 
 
-    console.log(error)
-    console.log(success)
-    console.log(isDeleting)
-
     //authentication error message -- if user fails to sign in
     const renderError = () => {
         if (error) { 
@@ -38,7 +34,6 @@ const DeleteUser = ({ navigation }) => {
         //Update the state you want to be updated
         dispatch({ type : 'reset_user_state' })
     } , [isFocused])
-
 
     return (
         <View style={styles.container}>

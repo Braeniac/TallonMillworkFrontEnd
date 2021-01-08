@@ -40,3 +40,5 @@ export const GET_PROJECTS               = 'get_projects';
 export const PROJECTS_RECEIVED          = 'projects_received'; 
 export const PROJECTS_NOT_RECEIVED      = 'projects_not_received'; 
 export const RESET_PROJECT_STATE        = 'reset_project_state'; 
+
+//Reports------------------------------------------------------------------

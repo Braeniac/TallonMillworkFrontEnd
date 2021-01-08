@@ -22,22 +22,18 @@ import CustomPickerUser from '../components/dailyInstallReport/CustomPickerUser'
 import AddModal from '../components/dailyInstallReport/AddModal';
 import ReactChipsInput from 'react-native-chips';
 
-
-
-
-
-
 //redux
 import { useSelector, useDispatch } from 'react-redux';
 import { allActiveProjects } from '../redux/actions/projectAction'; 
 import { retrieveUsers } from '../redux/actions/userAction'; 
+import { submitReport } from '../redux/actions/reportAction'; 
 
 
 const DailyInstallReport = ({ navigation }) => {
 
     // --------------------------------------------------------------------------------------------
 
-    const [date, setDate] = useState(0); 
+    const [date, setDate] = useState(''); 
     const [humidity, setHumidity] = useState(0); 
     const [weather, setWeather] = useState(0); 
 
@@ -54,7 +50,6 @@ const DailyInstallReport = ({ navigation }) => {
     const [nextDayPlan, setNextDaysPlan] = useState('');
 
 
-    
     const [siteSupervisor, setSiteSupervisor] = useState('Site Supervisor');
     const [siteSupervisorUID, setSiteSupervisorUID] = useState(0); 
     const [completedBy, setCompletedBy] = useState('Completed By');
@@ -64,15 +59,13 @@ const DailyInstallReport = ({ navigation }) => {
     //redux 
     const { token } = useSelector(state => state.auth); 
     const { allProjects, success } = useSelector(state => state.project); 
-    const { error, user, isSuccess } = useSelector(state => state.user); 
-      
+    const { error, user, isSuccess } = useSelector(state => state.user);   
     const dispatch = useDispatch(); 
 
     const isFocused = useIsFocused()
 
-
     useEffect(() => {
-        //set date 
+        //get date and time 
         setDate(new Date(new Date().toString().split('GMT')[0]+' UTC').toISOString().split('.')[0])
         //get all active projects
         dispatch(allActiveProjects(token))
@@ -80,13 +73,6 @@ const DailyInstallReport = ({ navigation }) => {
         dispatch(retrieveUsers(token))
     } , [isFocused])
 
-
-    // console.log('Date and Time ' + date); 
-    // console.log('chosen project ' + project); 
-    // console.log('chose project pid ' + projectPID)
-    // console.log('active users' + user)
-    // console.log('site supervisor + uid ' + siteSupervisor + " " + siteSupervisorUID)
-    // console.log('completed by + uid ' + completedBy + " " + completedByUID)
 
     // MODAL --------------------------------------------------------------------------------
 
@@ -139,9 +125,9 @@ const DailyInstallReport = ({ navigation }) => {
           );   
     }
 
+    //-------------------------------------------------------------------------------------------
 
-
-    //error
+    //user error
     const renderUserError = () => {
         if (error) { 
             return(
@@ -152,7 +138,7 @@ const DailyInstallReport = ({ navigation }) => {
         }
     }
 
-    // -------------------------------------------------------------------------------------------
+    // ------------------------------------------------------------------------------------------
 
     return(
         <>
@@ -171,24 +157,31 @@ const DailyInstallReport = ({ navigation }) => {
                     >
                     <View style={{ marginHorizontal: 20 }}>  
 
+                    <Text style={{ color: '#333', textAlign: 'center', marginTop : 10 }}>Date: {date.substring(0, 10)} Time: {date.substring(11, 19)}</Text>
 
-                    {/*  
-                    
-                    
-                        ADD 
-                            DATE
-                            TIME
-                            HUMIDITY 
-                            TEMPERATURE
-              
-                            
-                    */}
+                    <Text style={{ color: '#333', marginTop: 20, marginBottom: -16 }}>Humidity: </Text>
+                    <TextInput
+                        style={styles.textInput}
+                        placeholder="Enter site humidity"
+                        onChangeText={text => setHumidity(text)}
+                        value={humidity}
+                        keyboardType={'numeric'}
+                    />
+
+                    <Text style={{ color: '#333', marginTop: 20, marginBottom: -16 }}>Temperature: </Text>
+                    <TextInput
+                        style={styles.textInput}
+                        placeholder="Enter site temperature"
+                        onChangeText={text => setWeather(text)}
+                        value={weather}
+                        keyboardType={'numeric'}
+                    />    
 
                     <TouchableOpacity
                         onPress={ () => setModalVisible(!modalVisible) }
                         style={{borderColor: '#333', borderBottomWidth: 2, paddingBottom: 10, marginTop: 10}}
                     >
-                        <Text style={{ color: '#333' }}>{project}</Text>
+                        <Text style={{ color: '#333', marginTop: 30 }}>{project}</Text>
                     </TouchableOpacity>
 
                     { !(success) ? null : 
@@ -201,9 +194,7 @@ const DailyInstallReport = ({ navigation }) => {
                         setFunction={setProject}
                         setPID={setProjectPID}
                         itemType="name"
-                    />
-
-                    }
+                    /> }
 
                     <Add 
                         title="Installers" 
@@ -396,7 +387,12 @@ const DailyInstallReport = ({ navigation }) => {
                     <View
                         style={styles.button}
                     >
-                        <CustomButton title="Submit" onPress={() => console.log('pressed')} />
+                        <CustomButton 
+                            title="Submit" 
+                            onPress={() => {
+                                dispatch(submitReport(token,`${project} daily install report` ,projectPID, date, humidity, weather, siteConditions, obstacles, workToBeCompleted, notes, nextDayPlan, completedByUID, siteSupervisorUID)); 
+                            }}
+                        />
                     </View>
 
                     </View> 
