@@ -31,8 +31,6 @@ import { submitReport } from '../redux/actions/reportAction';
 
 const DailyInstallReport = ({ navigation }) => {
 
-    // --------------------------------------------------------------------------------------------
-
     const [date, setDate] = useState(''); 
     const [humidity, setHumidity] = useState(0); 
     const [weather, setWeather] = useState(0); 
@@ -49,21 +47,20 @@ const DailyInstallReport = ({ navigation }) => {
     const [notes, setNotes] = useState('');
     const [nextDayPlan, setNextDaysPlan] = useState('');
 
-
     const [siteSupervisor, setSiteSupervisor] = useState('Site Supervisor');
     const [siteSupervisorUID, setSiteSupervisorUID] = useState(0); 
     const [completedBy, setCompletedBy] = useState('Completed By');
     const [completedByUID, setCompletedByUID] = useState(0);
 
-
     //redux 
     const { token } = useSelector(state => state.auth); 
     const { allProjects, success } = useSelector(state => state.project); 
-    const { error, user, isSuccess } = useSelector(state => state.user);   
+    const { error, user, isSuccess } = useSelector(state => state.user); 
+    const { reportError, report } = useSelector(state => state.report);   
     const dispatch = useDispatch(); 
 
+    //update page 
     const isFocused = useIsFocused()
-
     useEffect(() => {
         //get date and time 
         setDate(new Date(new Date().toString().split('GMT')[0]+' UTC').toISOString().split('.')[0])
@@ -127,12 +124,28 @@ const DailyInstallReport = ({ navigation }) => {
 
     //-------------------------------------------------------------------------------------------
 
+    //set erros 
+
+    //project error 
+
+
     //user error
     const renderUserError = () => {
         if (error) { 
             return(
                 <View style={{ paddingTop: 10 }}>
                     <Text style={{ color : 'red' }}>{error}</Text>
+                </View>
+            )
+        }
+    }
+
+     //report error
+     const renderReportError = () => {
+        if (reportError) { 
+            return(
+                <View style={{ paddingTop: 10 }}>
+                    <Text style={{ color : 'red' }}>{reportError}</Text>
                 </View>
             )
         }
@@ -383,6 +396,9 @@ const DailyInstallReport = ({ navigation }) => {
                     /> }    
 
                     {renderUserError()}  
+
+                    {renderReportError()}
+
                     
                     <View
                         style={styles.button}
@@ -390,7 +406,32 @@ const DailyInstallReport = ({ navigation }) => {
                         <CustomButton 
                             title="Submit" 
                             onPress={() => {
-                                dispatch(submitReport(token,`${project} daily install report` ,projectPID, date, humidity, weather, siteConditions, obstacles, workToBeCompleted, notes, nextDayPlan, completedByUID, siteSupervisorUID)); 
+                                //submit report 
+                                dispatch(submitReport(token,`${project} daily install report` ,projectPID, date, humidity, weather, siteConditions, obstacles, workToBeCompleted, notes, nextDayPlan, completedByUID, siteSupervisorUID)),
+                                
+                                //submit installers
+
+                                //submit subtrades on site 
+
+                                //reset form 
+                                setDate(new Date(new Date().toString().split('GMT')[0]+' UTC').toISOString().split('.')[0]),
+                                setHumidity(0),
+                                setWeather(0),
+                                setProject('Project'),
+                                setProjectPID(0),
+                                setSiteConditions(''),
+                                setWorkToBeCompleted(''),
+                                setWorkToBeCompleted(''),
+                                setObstacles(''),
+                                setNotes(''),
+                                setNextDaysPlan(''),    
+                                setSiteSupervisor('Site Supervisor'),
+                                setSiteSupervisorUID(0),
+                                setCompletedBy('Completed By'),
+                                setCompletedByUID(0)
+
+                                //reset report reducer 
+                                dispatch({ type : 'reset_form' })
                             }}
                         />
                     </View>

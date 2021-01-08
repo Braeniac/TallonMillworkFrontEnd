@@ -42,3 +42,7 @@ export const PROJECTS_NOT_RECEIVED      = 'projects_not_received';
 export const RESET_PROJECT_STATE        = 'reset_project_state'; 
 
 //Reports------------------------------------------------------------------
+export const SUBMIT_REPORT              = 'sumbit_report'; 
+export const SUBMIT_REPORT_SUCCESS      = 'submit_report_success'; 
+export const SUBMIT_REPORT_FAIL         = 'submit_report_fail'; 
+export const RESET_REPORT               = 'reset_report';
