@@ -1,7 +1,8 @@
-import React, { useState } from 'react'; 
+import React, { useState, useEffect } from 'react'; 
 import { View, Text, TextInput, StyleSheet, SafeAreaView, Modal, Alert,TouchableOpacity, Dimensions } from 'react-native'; 
 import ImagePicker, { openCamera } from 'react-native-image-crop-picker';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'; 
+import { useIsFocused } from '@react-navigation/native'
 
 //camera -- upload pre/post images 
 import Camera from '../components/dailyInstallReport/Camera';
@@ -12,111 +13,37 @@ import Add from '../components/dailyInstallReport/Add';
 import Menu from '../components/Menu';
 //submit button
 import CustomButton from '../components/CustomButton';
-//CustomPicker for projects, site supervisor, completed by
-import CustomPicker from '../components/dailyInstallReport/CustomPicker'; 
+//CustomPicker for projects
+import CustomPickerProject from '../components/dailyInstallReport/CustomPickerProject'; 
+//CustomPicker for users 
+import CustomPickerUser from '../components/dailyInstallReport/CustomPickerUser'; 
 
 //checkboxmodal for installers and subtrades on site 
 import AddModal from '../components/dailyInstallReport/AddModal';
 import ReactChipsInput from 'react-native-chips';
 
 
-//delete later 
-const onPress = () => console.log('form submited')
+
+
+
+
+//redux
+import { useSelector, useDispatch } from 'react-redux';
+import { allActiveProjects } from '../redux/actions/projectAction'; 
+import { retrieveUsers } from '../redux/actions/userAction'; 
 
 
 const DailyInstallReport = ({ navigation }) => {
 
-    // DELETE --------------------------------------------------------------------------------
-
-
-    //delete later! 
-    const projects = [
-        {
-            key  : 1,
-            name : 'Brock University kitchen'
-        },
-        {
-            key  : 2,
-            name : 'Bramlea city center food court'
-        },
-        {
-            key  : 3,
-            name : 'Walmart McDonalds'
-        },
-        {
-            key  : 4,
-            name : 'Square one food court'
-        },
-        {
-            key  : 5,
-            name : 'Metro kitchen'
-        },
-        {
-            key  : 6,
-            name : 'Eaton center food court'
-        }
-    ]
-
-    //delete later!
-    const siteSupervisors = [
-        {
-            key  : 11,
-            name : 'Vince Carter'
-        },
-        {
-            key  : 21,
-            name : 'Kevin Durant'
-        },
-        {
-            key  : 31,
-            name : 'Kobe Bryant'
-        },
-        {
-            key  : 41,
-            name : 'Michael Jordan'
-        },
-        {
-            key  : 51,
-            name : 'Stephen Curry'
-        },
-        {
-            key  : 61,
-            name : 'LeBron James'
-        }
-    ]
-
-    //delete later!
-    const listcompletedBy = [
-        {
-            key  : 10,
-            name : 'Richard Hendricks'
-        },
-        {
-            key  : 12,
-            name : 'Big Head'
-        },
-        {
-            key  : 13,
-            name : 'Erlich Bachman'
-        },
-        {
-            key  : 14,
-            name : 'Jian Yang'
-        },
-        {
-            key  : 15,
-            name : 'Dinesh Chugtai'
-        },
-        {
-            key  : 16,
-            name : 'Bertram Gilfoyle'
-        }
-    ]
-
-
     // --------------------------------------------------------------------------------------------
 
+    const [date, setDate] = useState(0); 
+    const [humidity, setHumidity] = useState(0); 
+    const [weather, setWeather] = useState(0); 
+
     const [project, setProject] = useState('Project');
+    const [projectPID, setProjectPID] = useState(0); 
+
     const [installers, setInstallers] = useState([]);
     const [subtradesOnSite, setSubtradesOnSite] = useState([]);
 
@@ -126,8 +53,40 @@ const DailyInstallReport = ({ navigation }) => {
     const [notes, setNotes] = useState('');
     const [nextDayPlan, setNextDaysPlan] = useState('');
 
+
+    
     const [siteSupervisor, setSiteSupervisor] = useState('Site Supervisor');
+    const [siteSupervisorUID, setSiteSupervisorUID] = useState(0); 
     const [completedBy, setCompletedBy] = useState('Completed By');
+    const [completedByUID, setCompletedByUID] = useState(0);
+
+
+    //redux 
+    const { token } = useSelector(state => state.auth); 
+    const { allProjects, success } = useSelector(state => state.project); 
+    const { error, user, isSuccess } = useSelector(state => state.user); 
+      
+    const dispatch = useDispatch(); 
+
+    const isFocused = useIsFocused()
+
+
+    useEffect(() => {
+        //set date 
+        setDate(new Date(new Date().toString().split('GMT')[0]+' UTC').toISOString().split('.')[0])
+        //get all active projects
+        dispatch(allActiveProjects(token))
+        //get all active users 
+        dispatch(retrieveUsers(token))
+    } , [isFocused])
+
+
+    // console.log('Date and Time ' + date); 
+    // console.log('chosen project ' + project); 
+    // console.log('chose project pid ' + projectPID)
+    // console.log('active users' + user)
+    // console.log('site supervisor + uid ' + siteSupervisor + " " + siteSupervisorUID)
+    // console.log('completed by + uid ' + completedBy + " " + completedByUID)
 
     // MODAL --------------------------------------------------------------------------------
 
@@ -141,14 +100,6 @@ const DailyInstallReport = ({ navigation }) => {
     const [siteSupervisorModal, setSiteSuperVisorModal] = useState(false); 
     //modal completed by
     const [completedByModal, setCompletedByModal] = useState(false);
-
-
-
-    //build payload
-
-
-    
-
 
 
     // CAMERA --------------------------------------------------------------------------------
@@ -186,6 +137,19 @@ const DailyInstallReport = ({ navigation }) => {
           }).catch((error) => 
             console.warn("Image error:", error)
           );   
+    }
+
+
+
+    //error
+    const renderUserError = () => {
+        if (error) { 
+            return(
+                <View style={{ paddingTop: 10 }}>
+                    <Text style={{ color : 'red' }}>{error}</Text>
+                </View>
+            )
+        }
     }
 
     // -------------------------------------------------------------------------------------------
@@ -227,14 +191,19 @@ const DailyInstallReport = ({ navigation }) => {
                         <Text style={{ color: '#333' }}>{project}</Text>
                     </TouchableOpacity>
 
-                    <CustomPicker 
+                    { !(success) ? null : 
+
+                    <CustomPickerProject 
                         modalVisible={modalVisible}
                         setModalVisable={setModalVisible}
                         title="List of projects"
-                        DATA={projects}
+                        DATA={allProjects}
                         setFunction={setProject}
+                        setPID={setProjectPID}
                         itemType="name"
                     />
+
+                    }
 
                     <Add 
                         title="Installers" 
@@ -390,13 +359,18 @@ const DailyInstallReport = ({ navigation }) => {
                         <Text style={{ color: '#333' }}>{siteSupervisor}</Text>
                     </TouchableOpacity>
 
-                    <CustomPicker 
+                    { !(isSuccess) ? null : 
+
+                    <CustomPickerUser 
                         modalVisible={siteSupervisorModal}
                         setModalVisable={setSiteSuperVisorModal}
                         title="List site supervisors"
-                        DATA={siteSupervisors}
+                        DATA={user}
                         setFunction={setSiteSupervisor}
-                    />
+                        setUID={setSiteSupervisorUID}
+                    /> }
+
+                    {renderUserError()}  
 
                     <TouchableOpacity
                         onPress={ () => setCompletedByModal(!completedByModal) }
@@ -405,19 +379,24 @@ const DailyInstallReport = ({ navigation }) => {
                         <Text style={{ color: '#333' }}>{completedBy}</Text>
                     </TouchableOpacity>
 
-                    <CustomPicker 
+                    { !(isSuccess) ? null : 
+
+                    <CustomPickerUser 
                         modalVisible={completedByModal}
                         setModalVisable={setCompletedByModal}
                         title="Completed by"
-                        DATA={listcompletedBy}
+                        DATA={user}
                         setFunction={setCompletedBy}
                         itemType="name"
-                    /> 
+                        setUID={setCompletedByUID}
+                    /> }    
 
+                    {renderUserError()}  
+                    
                     <View
                         style={styles.button}
                     >
-                        <CustomButton title="Submit" onPress={onPress} />
+                        <CustomButton title="Submit" onPress={() => console.log('pressed')} />
                     </View>
 
                     </View> 

@@ -3,15 +3,16 @@ import React, { useState } from 'react';
 import { View, Text, Image, TouchableOpacity, Platform, StyleSheet } from 'react-native'; 
 
 import Menu from '../components/Menu';
-import { allActiveProjects, activeProject } from '../redux/actions/projectAction'; 
+import { retrieveUsers } from '../redux/actions/userAction'; 
 
 //redux
 import { useSelector, useDispatch } from 'react-redux';
 
 const HomeScreen = ({ navigation }) => {
 
-    const { token, user, isLoggedIn } = useSelector(state => state.auth)
-    const { isLoading, error, success, project, allProjects } = useSelector(state => state.project); 
+    const { token,  isLoggedIn } = useSelector(state => state.auth)
+    const { error, user } = useSelector(state => state.user)
+    const { isLoading, success, project, allProjects } = useSelector(state => state.project); 
     const dispatch = useDispatch(); 
 
     return (
@@ -21,28 +22,11 @@ const HomeScreen = ({ navigation }) => {
             <View>
            
                 <Menu navigation={navigation} />
-                <Text style={styles.welcome}>Welcome back, {user.fName}! </Text>
+                {/* <Text style={styles.welcome}>Welcome back, {user.fName}! </Text> */}
 
 
 
-            {/* ------- delete later ------ */}
-            <TouchableOpacity
-                onPress={
-                    () => dispatch(allActiveProjects(token))
-                }
-            >
-                <Text>get ALL projects</Text>
-            </TouchableOpacity>
             
-            <TouchableOpacity
-            onPress={
-                    () => dispatch(activeProject(4, token))
-                }
-            >
-                <Text>get A projects</Text>
-            </TouchableOpacity>
-
-
 
 
             </View>

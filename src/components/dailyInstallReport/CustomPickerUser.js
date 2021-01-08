@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, Modal, Alert, ScrollView, StyleSheet } from 'react-native';
 
-const CustomPicker = ({ modalVisible, setModalVisable, title, DATA, setFunction }) => {
+const CustomPickerUser = ({ modalVisible, setModalVisable, title, DATA, setUID, setFunction }) => {
     return(
         <Modal
             animationType="slide"
@@ -17,16 +17,18 @@ const CustomPicker = ({ modalVisible, setModalVisable, title, DATA, setFunction 
                     <ScrollView style={{ backgroundColor: 'white' }}>
                         <Text style={styles.title}>{title}</Text>
                         {
-                            DATA.map((d, i) => (
+
+                            DATA.slice(0).reverse().map((d, i) => (
                                 <TouchableOpacity
                                     onPress={() => {
-                                            setFunction(d.name)
+                                            setFunction(d.fName + " " + d.lName)
+                                            setUID(d.uid)
                                             setModalVisable(!modalVisible)
                                         }
                                     }
                                 >
                                     <View style={{ borderBottomWidth: 1}}>
-                                        <Text style={styles.items}>{d.name}</Text>
+                                        <Text style={styles.items}>{d.fName + " " + d.lName}</Text>
                                     </View>
                                 </TouchableOpacity>
                             ))
@@ -82,4 +84,4 @@ const styles = StyleSheet.create({
 
 })
 
-export default CustomPicker;
+export default CustomPickerUser;

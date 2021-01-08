@@ -22,6 +22,12 @@ export const DELETE_USER_SUCCESS        = 'delete_user_success';
 export const DELETE_USER_FAIL           = 'delete_user_fail'; 
 export const RESET_USER_STATE           = 'reset_user_state'; 
 
+
+//retrieve user 
+export const RETRIEVE_USER              = 'retrieve_user'; 
+export const RETRIEVE_USER_SUCCESS      = 'retrieve_user_success'
+export const RETRIEVE_USER_FAIL         = 'retrieve_user_fail'; 
+
 //project------------------------------------------------------------------
 
 //add project

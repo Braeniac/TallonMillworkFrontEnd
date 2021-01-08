@@ -5,7 +5,10 @@ import {
     DELETE_USER,
     DELETE_USER_SUCCESS,
     DELETE_USER_FAIL,
-    RESET_USER_STATE 
+    RESET_USER_STATE,
+    RETRIEVE_USER,
+    RETRIEVE_USER_SUCCESS,
+    RETRIEVE_USER_FAIL
 } from "../actions/actionTypes";
 
 const INITIAL_STATE = {
@@ -13,7 +16,7 @@ const INITIAL_STATE = {
     isDeleting : false,
     user : null, 
     error: '',
-    success : false
+    isSuccess : false
 }
 
 export default user = (state=INITIAL_STATE, action) => {
@@ -27,26 +30,26 @@ export default user = (state=INITIAL_STATE, action) => {
             return {
                 ...state,
                 isFetching : false, 
-                success : true 
+                isSuccess : true 
             }
         case FAILED_TO_ADD_USER: 
             return {
                 ...state, 
                 isFeching : false, 
-                success : false, 
+                isSuccess : false, 
                 error : 'User was not added. Please try again!'
             }
         case DELETE_USER: 
             return {
                 ...state,
                 isDeleting : true,
-                success : false
+                isSuccess : false
             }
         case DELETE_USER_SUCCESS:
             return {
                 ...state,
                 isDeleting : false,
-                success : true,
+                isSuccess : true,
                 error : ''
             }
         case DELETE_USER_FAIL :
@@ -54,7 +57,7 @@ export default user = (state=INITIAL_STATE, action) => {
                 ...state,
                 isDeleting : false, 
                 error : 'User was not deleted. Please try again!',
-                success : false
+                isSuccess : false
             }
         case RESET_USER_STATE: 
             return {
@@ -63,7 +66,26 @@ export default user = (state=INITIAL_STATE, action) => {
                 isDeleting : false,
                 user : null, 
                 error: '',
-                success : false
+                isSuccess : false
+            }
+        case RETRIEVE_USER:
+            return {
+                ...state,
+                isFetching : true
+            }
+        case RETRIEVE_USER_SUCCESS: 
+            return {
+                ...state,
+                isFetching : false, 
+                isSuccess : true,
+                user : action.payload,
+                error: ''
+            }
+        case RETRIEVE_USER_FAIL: 
+            return {
+                ...state,
+                isFetching : false, 
+                error : 'Unable to retrieve users. Please try again!'
             }
         default:
             return state;
