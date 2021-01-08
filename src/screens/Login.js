@@ -1,5 +1,5 @@
 import React, { useState } from 'react'; 
-import { View, Text, TextInput, Platform, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
+import { View, Text, TextInput, Platform, StyleSheet, TouchableOpacity, Dimensions, Modal } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'; 
 
 //redux
@@ -8,12 +8,15 @@ import { loginUser } from '../redux/actions/authAction';
 
 //login button
 import CustomButton from '../components/CustomButton'; 
+import ForgetPasswordModal from '../components/updateProfile/ForgetPasswordModal';
 
 const Login = ({ navigation })  => {
 
     const { username, password, error } = useSelector(state => state.auth); 
     const dispatch = useDispatch(); 
 
+
+    const [modalVisible, setModalVisible] = useState(false);
 
     //authentication error message -- if user fails to sign in
     const renderError = () => {
@@ -61,12 +64,26 @@ const Login = ({ navigation })  => {
 
             {renderError()}
 
+
+
+
+
+
+
+
             <TouchableOpacity 
                 style={styles.forgetPassword}
-                onPress={() => console.log('forget password')}    
+                onPress={ () => setModalVisible(!modalVisible) }    
             >
                 <Text style={{ fontSize: 18, color: '#2D7FF3' }}>Forget password?</Text>
             </TouchableOpacity>
+
+            <ForgetPasswordModal 
+                modalVisible={modalVisible}
+                setModalVisable={setModalVisible}
+                title="Recover Password"
+                navigation={navigation}
+            />
            
            <View
                 style={styles.button}
