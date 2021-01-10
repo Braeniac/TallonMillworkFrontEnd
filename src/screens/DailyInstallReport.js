@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'; 
-import { View, Text, TextInput, StyleSheet, SafeAreaView, Modal, Alert,TouchableOpacity, Dimensions } from 'react-native'; 
+import { View, Text, TextInput, StyleSheet, SafeAreaView, TouchableOpacity, Dimensions } from 'react-native'; 
 import ImagePicker, { openCamera } from 'react-native-image-crop-picker';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'; 
 import { useIsFocused } from '@react-navigation/native'
@@ -26,7 +26,7 @@ import ReactChipsInput from 'react-native-chips';
 import { useSelector, useDispatch } from 'react-redux';
 import { allActiveProjects } from '../redux/actions/projectAction'; 
 import { retrieveUsers } from '../redux/actions/userAction'; 
-import { submitReport, submitInstallersOnSite, submitSubtradesOnSite, retrieveReportByID } from '../redux/actions/reportAction'; 
+import { submitReport } from '../redux/actions/reportAction'; 
 
 
 const DailyInstallReport = ({ navigation }) => {
@@ -56,7 +56,7 @@ const DailyInstallReport = ({ navigation }) => {
     const { token } = useSelector(state => state.auth); 
     const { allProjects, success } = useSelector(state => state.project); 
     const { error, user, isSuccess } = useSelector(state => state.user); 
-    const { reportError, report } = useSelector(state => state.report);   
+    const { reportError } = useSelector(state => state.report);   
     const dispatch = useDispatch(); 
 
     //update page 
@@ -90,10 +90,6 @@ const DailyInstallReport = ({ navigation }) => {
 
     // CAMERA --------------------------------------------------------------------------------
 
-    //TODO !!!!!!!!!!!!!!!!
-    // _ store images 
-    
-
     //camera modal 
     const [cameraModal, setCameraModal] = useState(false); 
 
@@ -125,11 +121,7 @@ const DailyInstallReport = ({ navigation }) => {
           );   
     }
 
-    //-------------------------------------------------------------------------------------------
-
-    //set erros 
-
-    //project error 
+    // ERRORS -------------------------------------------------------------------------------------------
 
 
     //user error
@@ -154,7 +146,7 @@ const DailyInstallReport = ({ navigation }) => {
         }
     }
 
-    // ------------------------------------------------------------------------------------------
+    // JSX ------------------------------------------------------------------------------------------
 
     return(
         <>

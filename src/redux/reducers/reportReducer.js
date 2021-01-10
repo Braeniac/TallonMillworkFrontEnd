@@ -6,7 +6,7 @@ import {
  } from "../actions/actionTypes"; 
 
 const INITIAL_STATE = {
-    report: [],
+    report: null,
     reportError: '',
     retrieving: false,
     reportSuccess: false,
@@ -26,19 +26,18 @@ export default auth = (state=INITIAL_STATE, action) => {
                 retrieving : false, 
                 reportSuccess : true, 
                 reportError : '',
-                report : action.payload
             }
         case SUBMIT_REPORT_FAIL:
             return {
                 ...state, 
                 retrieving : false, 
                 reportSuccess : false, 
-                reportError : 'Submission failed. Please try again!'
+                reportError : 'Submission failed. Please double-check and try again!'
             }
         case RESET_REPORT: {
             return {
                 ...state,
-                report: [],
+                report: null,
                 reportError: '',
                 retrieving: false,
                 reportSuccess: false,

@@ -110,13 +110,15 @@ const styles = StyleSheet.create({
     },
     button: {
         marginTop: 30,
-        borderTopWidth: 1,
-        borderBottomWidth: 1,
+        borderWidth: 1,
+        borderRadius: 10,
         borderColor: 'lightgray',
         paddingVertical: 15
     },
     buttonText: {
-        fontSize: 20
+        fontSize: 15,
+        paddingLeft: 10,
+        paddingTop: 7
     }
 })
 

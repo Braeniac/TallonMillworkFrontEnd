@@ -12,7 +12,7 @@ const INITIAL_STATE = {
     isLoading: false, 
     error: '',
     success: false,
-    allProjects : null, 
+    allProjects : [], 
     isFetching: 'false'
 }
 
@@ -56,7 +56,7 @@ export default project = (state=INITIAL_STATE, action) => {
                 error : 'Failed to retrieve project(s). Please try again!',
                 isLoading: false, 
                 success: false,
-                allProjects : null, 
+                allProjects : [], 
             }
         case RESET_PROJECT_STATE: 
             return {
