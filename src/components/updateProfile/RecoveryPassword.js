@@ -2,10 +2,30 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Modal, Alert, StyleSheet, Dimensions } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'; 
 
+//redux
+import { useSelector, useDispatch } from 'react-redux';
+import { recoverPasswords } from '../../redux/actions/authAction'; 
+
 const RecoverPassword = ({ modalVisible, setModalVisable, title}) => {
 
     const [uname, setUName] = useState(''); 
     const [answer, setAnswer] = useState(''); 
+    const [newPassword, setNewPassword] = useState(''); 
+
+    const { error, token, question, questionError } = useSelector(state => state.auth); 
+    const dispatch = useDispatch(); 
+
+
+    //render error message 
+    const renderError = () => {
+        if (questionError) { 
+            return(
+                <View style={{ justifyContent : 'center', marginTop: -20 }}>
+                    <Text style={{ color : 'red', marginHorizontal: 20, textAlign: 'center' }}>{questionError}</Text>
+                </View>
+            )
+        }
+    }
 
     return(
         <Modal
@@ -30,63 +50,59 @@ const RecoverPassword = ({ modalVisible, setModalVisable, title}) => {
                     >
                     <View>
 
-                    <Text style={{ fontSize: 20, color: '#333', textAlign: 'center', marginBottom: 20 }}>What statue is on your desk?</Text>
+                    <Text style={{ fontSize: 20, color: '#333', textAlign: 'center', marginBottom: 20 }}>{question}</Text>
                     
+                    {renderError()}
+
                     <View style={{ marginHorizontal : 20 }}>
-                   
-                    <Text style={styles.text}>Provide recovery question answer </Text>
+            
                     <TextInput
                         style={styles.textInput}
                         placeholder="Recovery Question Answer"
-                        onChangeText={text => setUName(text)}
-                        value={uname}
+                        autoCapitalize="none"
+                        autoCorrect={false}
+                        onChangeText={text => setAnswer(text)}
+                        value={answer}
                     />
-                    
-
-                    <Text style={styles.text}>Enter your username </Text>
+           
                     <TextInput
                         style={styles.textInput}
                         placeholder="Username"
+                        autoCapitalize="none"
+                        autoCorrect={false}
                         onChangeText={text => setUName(text)}
                         value={uname}
                     />
             
-
-
-                    <Text style={styles.text}>Enter your new password </Text>
                     <TextInput
                         style={styles.textInput}
                         placeholder="New Password"
-                        onChangeText={text => setUName(text)}
-                        value={uname}
+                        autoCapitalize="none"
+                        autoCorrect={false}
+                        onChangeText={text => setNewPassword(text)}
+                        value={newPassword}
                     />
                     </View>
-                
 
                     <View style={styles.button}>
                     <TouchableOpacity
                         onPress={ () => {
                             setModalVisable(!modalVisible)
+                            dispatch({ type : 'reset_question' })
                         }}
                     >
                         <Text style={styles.buttonText}>Cancel</Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity
-                        onPress={ () => {
-                             
-                            console.log('')
+                        onPress={ () => { 
+                            dispatch(recoverPasswords(answer, uname, newPassword))
                         }}
                     >
                         <Text style={styles.buttonText}>Submit</Text>
                     </TouchableOpacity>
                     </View> 
-
-
-
-
-
-                    
+ 
                     </View>
                     </KeyboardAwareScrollView>
                    
@@ -117,10 +133,6 @@ const styles = StyleSheet.create({
         marginTop: 50,
         color: '#333'
     },
-    text: {
-        color: '#333',
-        marginBottom : -16 
-    },  
     textInput: {
         borderBottomColor: '#333',
         height: 60, 

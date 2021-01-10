@@ -6,7 +6,7 @@ import {
  } from "../actions/actionTypes"; 
 
 const INITIAL_STATE = {
-    report: null,
+    report: [],
     reportError: '',
     retrieving: false,
     reportSuccess: false,
@@ -38,7 +38,7 @@ export default auth = (state=INITIAL_STATE, action) => {
         case RESET_REPORT: {
             return {
                 ...state,
-                report: null,
+                report: [],
                 reportError: '',
                 retrieving: false,
                 reportSuccess: false,

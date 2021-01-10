@@ -2,12 +2,20 @@
 //auth---------------------------------------------------------------------
 
 export const USERNAME_CHANGED           = 'username_changed'; 
-export const PASSWORD_CHANGED           = 'password_changed'; 
+export const PASSWORD_CHANGED           = 'password_changed';
+
+export const LOGIN_USER                 = 'login_user'; 
 export const LOGIN_USER_SUCCESS         = 'login_user_success'; 
 export const LOGIN_USER_FAIL            = 'login_user_fail'; 
-export const LOGIN_USER                 = 'login_user'; 
-export const LOGOUT_USER                = 'logout_user'; 
 export const SET_TOKEN                  = 'set_token'; 
+
+export const STORE_QUESTION             = 'store_question'; 
+export const STORE_QUESTION_SUCCESS     = 'store_question_success'; 
+export const STORE_QUESTION_FAIL        = 'store_question_fail'
+export const RESET_QUESTION             = 'reset_question';
+
+export const LOGOUT_USER                = 'logout_user'; 
+
 
 //user---------------------------------------------------------------------
 

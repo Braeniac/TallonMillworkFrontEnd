@@ -3,10 +3,19 @@ import { View, Text, TextInput, TouchableOpacity, Modal, Alert, StyleSheet, Dime
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'; 
 import RecoverPassword from './RecoveryPassword'; 
 
+//redux
+import { useSelector, useDispatch } from 'react-redux';
+import { forgetPassword } from '../../redux/actions/authAction'; 
+
 const ForgetPasswordModal = ({ modalVisible, setModalVisable, title }) => {
 
     const [uname, setUName] = useState(''); 
     const [recoveryModal, setRocoveryModal] = useState(false); 
+
+    const dispatch = useDispatch(); 
+
+
+
 
     return(
         <Modal
@@ -21,7 +30,7 @@ const ForgetPasswordModal = ({ modalVisible, setModalVisable, title }) => {
             <View style={styles.container}>
                 <View style={styles.inner}>
                     <Text style={styles.title}>{title}</Text>
-                    <Text style={{ textAlign : 'center', color : '#333' }}>Don't worry, happens to the best of us.</Text>
+                    <Text style={{ textAlign : 'center', color : '#333', fontSize : 15 }}>Don't worry, happens to the best of us.</Text>
                     <KeyboardAwareScrollView
                         style={{
                             display: "flex",
@@ -33,10 +42,12 @@ const ForgetPasswordModal = ({ modalVisible, setModalVisable, title }) => {
                     <View>
                     
                     <View style={{ marginHorizontal : 20, marginTop : 20 }}>
-                    <Text style={styles.text}>Enter your username </Text>
+                    <Text style={styles.text}>Enter your username</Text>
                     <TextInput
                         style={styles.textInput}
                         placeholder="Username"
+                        autoCapitalize="none"
+                        autoCorrect={false}
                         onChangeText={text => setUName(text)}
                         value={uname}
                     />
@@ -44,15 +55,18 @@ const ForgetPasswordModal = ({ modalVisible, setModalVisable, title }) => {
 
                     <View style={styles.button}>
                     <TouchableOpacity
-                        onPress={ () => setModalVisable(!modalVisible) }
+                        onPress={ () => {
+                            setModalVisable(!modalVisible) 
+                        }}
                     >
                         <Text style={styles.buttonText}>Cancel</Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity
                         onPress={ () => {
-                            //get recovery question -- if they receive one 
-                            setRocoveryModal(!recoveryModal); 
+                            dispatch(forgetPassword(uname))
+                            setRocoveryModal(!recoveryModal)
+                            setUName('')
                         }}
                     >
                         <Text style={styles.buttonText}>Submit</Text>

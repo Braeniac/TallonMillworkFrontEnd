@@ -64,13 +64,6 @@ const Login = ({ navigation })  => {
 
             {renderError()}
 
-
-
-
-
-
-
-
             <TouchableOpacity 
                 style={styles.forgetPassword}
                 onPress={ () => setModalVisible(!modalVisible) }    

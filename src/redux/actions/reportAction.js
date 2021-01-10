@@ -8,7 +8,7 @@ import {
  } from "./actionTypes"
 
 
-export const submitReport = (token, rname, pid, date, humidity, weather, siteConditions, obstacles, toDo, notes, nextDayPlan, creatorUid, supervisorUid) => {
+export const submitReport = (token, rname, pid, date, humidity, weather, siteConditions, obstacles, toDo, notes, nextDayPlan, creatorUid, supervisorUid, installers, subtradesOnSite) => {
     return (dispatch) => {
         dispatch({ type : SUBMIT_REPORT })
         return axios.post(
@@ -33,11 +33,64 @@ export const submitReport = (token, rname, pid, date, humidity, weather, siteCon
                     "Authorization" : token
                 }
             }
-        ).then( res => dispatch({ type : SUBMIT_REPORT_SUCCESS, payload : res.data }))
+        )
+        .then(res => {
+            installers.map(d => {
+                dispatch(submitInstallersOnSite(token, res.data, d))
+            })
+            subtradesOnSite.map(s => {
+                dispatch(submitSubtradesOnSite(token, res.data, s))
+            })
+        })
+        // .then( res => dispatch({ type : SUBMIT_REPORT_SUCCESS, payload : JSON.parse(res.data).rid }))
         .catch( () => dispatch({ type : SUBMIT_REPORT_FAIL }))
     }
 }
 
+
+export const submitInstallersOnSite = (token, rid, name) => {
+    return (dispatch) => {
+        return axios.post(
+            'http://localhost:8080/api/report/installer',
+            {
+                headers: {
+                    "Authorization" : token
+                }
+            },
+            {
+                params: {
+                    "rid" : rid,
+                    "name" : name
+                }
+            }
+        ).then(res => dispatch({ type : SUBMIT_REPORT_SUCCESS }))
+        .catch(err => console.log(err))
+    }
+}
+
+
+export const submitSubtradesOnSite = (token, rid, name) => {
+    return (dispatch) => {
+        return axios.post(
+            'http://localhost:8080/api/report/subtrade',
+            {
+                headers: {
+                    "Authorization" : token
+                }
+            },
+            {
+                params: {
+                    "rid" : rid,
+                    "name" : name
+                }
+            }
+        ).then(res => dispatch({ type : SUBMIT_REPORT_SUCCESS }))
+        .catch(err => console.log(err))
+    }
+}
+
+
+//reset all reports 
 export const resetReport = () => {
     return {
         type: RESET_REPORT
@@ -45,35 +98,35 @@ export const resetReport = () => {
 }
 
 
-
-//get report 
-export const retrieveReport = () => {
+//get all of the reports 
+export const retrieveReport = (token) => {
     return (dispatch) => {
         return axios.get(
             // 'http://10.0.2.2:8080/api/report', //--android
             'http://localhost:8080/api/report',
             {
-                "rname" : rname,
-                "pid" : pid,
-                "date" : date,
-                "humidity" : humidity,
-                "weather" : weather,
-                "siteConditions" : siteConditions,  
-                "obstacles" : obstacles,
-                "toDo" : toDo,
-                "notes" : notes, 
-                "nextDayPlan" : nextDayPlan,
-                "creatorUid" : creatorUid,
-                "supervisorUid" : supervisorUid
-            },
-            {
                 headers: {
                     "Authorization" : token
                 }
             }
-        ).then( res => dispatch({ type : SUBMIT_REPORT_SUCCESS, payload : res.data }))
+        ).then(res => console.log(res.data))
+        // ).then( res => dispatch({ type : SUBMIT_REPORT_SUCCESS, payload : res.data }))
         .catch( () => dispatch({ type : SUBMIT_REPORT_FAIL }))
     }
 }
 
 
+//get a report by project id 
+export const retrieveReportByID = (token, pid) => {
+    return (dispatch) => {
+        return axios.get(
+            `http://localhost:8080/api/report/${pid}`,
+            {
+                headers: {
+                    "Authorization" : token 
+                }
+            }
+        ).then(res => dispatch({ type: SUBMIT_REPORT_SUCCESS, payload: res.data }))
+        .catch(err => console.log(err))
+    }
+}

@@ -28,6 +28,7 @@ function Main() {
         drawerContent={ props => <CustomDrawerContent {...props} /> }
       >
         <Drawer.Screen  name="Login"              component={Login}               />
+
         <Drawer.Screen  name="Home"               component={HomeScreen}          />
         <Drawer.Screen  name="DailyInstallReport" component={DailyInstallReport}  />
         <Drawer.Screen  name="Profile"            component={Profile}             />

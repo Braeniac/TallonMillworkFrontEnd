@@ -4,27 +4,45 @@ import { View, Text, Image, TouchableOpacity, Platform, StyleSheet } from 'react
 
 import Menu from '../components/Menu';
 import { retrieveUsers } from '../redux/actions/userAction'; 
+import { submitInstallersOnSite, retrieveReport, retrieveReportByID } from '../redux/actions/reportAction';
 
 //redux
 import { useSelector, useDispatch } from 'react-redux';
 
 const HomeScreen = ({ navigation }) => {
 
-    const { token,  isLoggedIn } = useSelector(state => state.auth)
-    const { error, user } = useSelector(state => state.user)
-    const { isLoading, success, project, allProjects } = useSelector(state => state.project); 
+    const { token,  isLoggedIn, user } = useSelector(state => state.auth)
     const dispatch = useDispatch(); 
+
+
+    console.log(user)
+
+    
 
     return (
      
         <View style={styles.container}>
         {!(isLoggedIn) ? null : 
             <View>
-           
                 <Menu navigation={navigation} />
-                {/* <Text style={styles.welcome}>Welcome back, {user.fName}! </Text> */}
+                <Text>Welcome back, {user.fName}</Text>
 
 
+                
+
+
+
+    
+                        
+                       
+                        
+
+
+                  
+                            
+                        
+
+                        
 
             
 

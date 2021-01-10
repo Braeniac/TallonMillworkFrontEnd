@@ -1,5 +1,17 @@
-import { USERNAME_CHANGED, PASSWORD_CHANGED, LOGIN_USER_SUCCESS, LOGIN_USER_FAIL, LOGIN_USER, LOGOUT_USER, SET_TOKEN } from "../actions/actionTypes";
-import {encode as btoa} from 'base-64'; 
+import { 
+    USERNAME_CHANGED, 
+    PASSWORD_CHANGED, 
+    LOGIN_USER_SUCCESS, 
+    LOGIN_USER_FAIL, 
+    LOGIN_USER, 
+    LOGOUT_USER, 
+    SET_TOKEN, 
+    STORE_QUESTION_SUCCESS,
+    STORE_QUESTION,
+    STORE_QUESTION_FAIL,
+    RESET_QUESTION
+} from "../actions/actionTypes";
+
 
 const INITIAL_STATE = {
     username: '',
@@ -8,7 +20,11 @@ const INITIAL_STATE = {
     isLoading: false, 
     isLoggedIn: false, 
     error: '',     
-    token: ''
+    token: '',
+    question: '',
+    questionRecieved: false, 
+    loadingQuestion: false,
+    questionError: ''
 }
 
 export default auth = (state=INITIAL_STATE, action) => {
@@ -62,6 +78,36 @@ export default auth = (state=INITIAL_STATE, action) => {
                 isLoggedIn: false, 
                 error: '',     
                 token: ''
+            }
+        case STORE_QUESTION:
+            return {
+                ...state,
+                loadingQuestion: true,
+                questionError: ''
+            }
+        case STORE_QUESTION_SUCCESS:
+            return {
+                ...state,
+                question : action.payload,
+                questionRecieved : true,
+                loadingQuestion: false,
+                questionError: ''
+            }
+        case STORE_QUESTION_FAIL: 
+            return {
+                ...state,
+                question: '',
+                questionRecieved: false, 
+                loadingQuestion: false,
+                questionError: 'The username you entered did not match our records. Please double-check and try again!'
+            }
+        case RESET_QUESTION:
+            return {
+                ...state,
+                question: '',
+                questionRecieved: false, 
+                loadingQuestion: false,
+                questionError: ''
             }
         default:
             return state; 

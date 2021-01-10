@@ -1,7 +1,18 @@
 import axios from 'axios'; 
 import {encode as btoa} from 'base-64'; 
 
-import { USERNAME_CHANGED, PASSWORD_CHANGED, LOGIN_USER_SUCCESS, LOGIN_USER_FAIL, LOGIN_USER, LOGOUT_USER, SET_TOKEN } from "./actionTypes"
+import { 
+    USERNAME_CHANGED, 
+    PASSWORD_CHANGED, 
+    LOGIN_USER_SUCCESS, 
+    LOGIN_USER_FAIL, 
+    LOGIN_USER, 
+    LOGOUT_USER, 
+    SET_TOKEN, 
+    STORE_QUESTION_SUCCESS, 
+    STORE_QUESTION_FAIL,
+    RESET_QUESTION
+} from "./actionTypes"
 
 //set field username
 export const usernameChanged = (text) => {
@@ -73,18 +84,25 @@ const logout = (dispatch, navigation) => {
 }
 
 
-//-----does not work!----
 //change user information -- first name, last name, and password 
 export const updateUserInformation = (fName, lName, password, token) => {
+
+
+    console.log(fName)
+    console.log(lName)
+    console.log(password)
+    console.log(token)
 
     return (dispatch) => {
         return axios.put(
             // 'http://10.0.2.2:8080/api/user', //--android 
             'http://localhost:8080/api/user',
             {
-                "fName" : fName,
-                "lName" : lName,
-                "password" : password 
+                params: {
+                    "fName" : fName,
+                    "lName" : lName,
+                    "password" : password 
+                }
             },
             {
                 headers: {
@@ -95,3 +113,46 @@ export const updateUserInformation = (fName, lName, password, token) => {
         .catch(err => console.log(err))
     }
 }
+
+//forget password 
+export const forgetPassword = (uname) => {
+    return (dispatch) => {
+        dispatch({ type: 'STORE_QUESTION' })
+        return axios.get(
+            'http://localhost:8080/api/user/forgotPassword',
+            {
+                params: {
+                    "uname" : uname
+                }
+            }
+        ).then(res => dispatch({ type : STORE_QUESTION_SUCCESS, payload:res.data }) )
+        .catch(() => dispatch({ type : STORE_QUESTION_FAIL }))
+    }
+}
+
+//reset question fields 
+export const resetQuestion = () => {
+    return {
+        type: RESET_QUESTION
+    }
+}
+
+
+//recover password ---not working! 
+export const recoverPasswords = (answer, uname, password) => {
+    return (dispatch) => {
+        return axios.put(
+            'http://localhost:8080/api/user/forgotPassword',
+            {
+                params: {
+                    "answer" : answer,
+                    "uname" : uname,
+                    "password" : password
+                }
+            }
+
+        ).then(res => console.log(res.data))
+        .catch(err => console.log(err))
+    }
+}
+

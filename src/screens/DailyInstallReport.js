@@ -26,7 +26,7 @@ import ReactChipsInput from 'react-native-chips';
 import { useSelector, useDispatch } from 'react-redux';
 import { allActiveProjects } from '../redux/actions/projectAction'; 
 import { retrieveUsers } from '../redux/actions/userAction'; 
-import { submitReport } from '../redux/actions/reportAction'; 
+import { submitReport, submitInstallersOnSite, submitSubtradesOnSite, retrieveReportByID } from '../redux/actions/reportAction'; 
 
 
 const DailyInstallReport = ({ navigation }) => {
@@ -62,12 +62,15 @@ const DailyInstallReport = ({ navigation }) => {
     //update page 
     const isFocused = useIsFocused()
     useEffect(() => {
+        dispatch({ type : 'reset_report' })
         //get date and time 
         setDate(new Date(new Date().toString().split('GMT')[0]+' UTC').toISOString().split('.')[0])
         //get all active projects
         dispatch(allActiveProjects(token))
         //get all active users 
         dispatch(retrieveUsers(token))
+        setInstallers([])
+        setSubtradesOnSite([])
     } , [isFocused])
 
 
@@ -288,7 +291,7 @@ const DailyInstallReport = ({ navigation }) => {
                     { (subtradesOnSite.length === 0) ? null :
                         <View>
                             <ReactChipsInput 
-                                label="Installers added: " 
+                                label="Subtrades on site: " 
                                 initialChips={subtradesOnSite} 
                                 onChangeChips={
                                    chips => setSubtradesOnSite([].concat(chips))
@@ -399,7 +402,6 @@ const DailyInstallReport = ({ navigation }) => {
 
                     {renderReportError()}
 
-                    
                     <View
                         style={styles.button}
                     >
@@ -407,12 +409,21 @@ const DailyInstallReport = ({ navigation }) => {
                             title="Submit" 
                             onPress={() => {
                                 //submit report 
-                                dispatch(submitReport(token,`${project} daily install report` ,projectPID, date, humidity, weather, siteConditions, obstacles, workToBeCompleted, notes, nextDayPlan, completedByUID, siteSupervisorUID)),
-                                
-                                //submit installers
-
-                                //submit subtrades on site 
-
+                                dispatch(submitReport(token,
+                                    `${project} DIR`,
+                                    projectPID, 
+                                    date, 
+                                    humidity, 
+                                    weather, 
+                                    siteConditions, 
+                                    obstacles, 
+                                    workToBeCompleted, 
+                                    notes, 
+                                    nextDayPlan, 
+                                    completedByUID, 
+                                    siteSupervisorUID, 
+                                    installers, 
+                                    subtradesOnSite)),
                                 //reset form 
                                 setDate(new Date(new Date().toString().split('GMT')[0]+' UTC').toISOString().split('.')[0]),
                                 setHumidity(0),
@@ -428,10 +439,9 @@ const DailyInstallReport = ({ navigation }) => {
                                 setSiteSupervisor('Site Supervisor'),
                                 setSiteSupervisorUID(0),
                                 setCompletedBy('Completed By'),
-                                setCompletedByUID(0)
-
-                                //reset report reducer 
-                                dispatch({ type : 'reset_form' })
+                                setCompletedByUID(0),
+                                setInstallers([]),
+                                setSubtradesOnSite([])
                             }}
                         />
                     </View>
