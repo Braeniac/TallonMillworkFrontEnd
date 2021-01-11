@@ -78,6 +78,8 @@ const ForgetPasswordModal = ({ modalVisible, setModalVisable, title }) => {
                         modalVisible={recoveryModal}
                         setModalVisable={setRocoveryModal}
                         title="Recover Password"
+                        backToLogin={modalVisible}
+                        setBackToLogin={setModalVisable}
                     />
 
                     </View>

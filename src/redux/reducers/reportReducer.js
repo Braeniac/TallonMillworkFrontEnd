@@ -2,15 +2,17 @@ import {
     SUBMIT_REPORT,
     SUBMIT_REPORT_SUCCESS,
     SUBMIT_REPORT_FAIL,
-    RESET_REPORT
+    RESET_REPORT,
+    GET_REPORT,
+    GET_REPORT_SUCCESS,
+    GET_REPORT_FAIL
  } from "../actions/actionTypes"; 
 
 const INITIAL_STATE = {
-    report: null,
+    report: [],
     reportError: '',
     retrieving: false,
     reportSuccess: false,
-    
 }
 
 export default auth = (state=INITIAL_STATE, action) => {
@@ -34,15 +36,34 @@ export default auth = (state=INITIAL_STATE, action) => {
                 reportSuccess : false, 
                 reportError : 'Submission failed. Please double-check and try again!'
             }
-        case RESET_REPORT: {
+        case RESET_REPORT: 
             return {
                 ...state,
-                report: null,
+                report: [],
                 reportError: '',
                 retrieving: false,
                 reportSuccess: false,
             }
-        }
+        case GET_REPORT:
+            return {
+                ...state,
+                retrieving : true
+            }
+        case GET_REPORT_SUCCESS: 
+            return {
+                ...state,
+                retrieving : false,
+                reportSuccess: true,
+                report: action.payload
+            }
+        case GET_REPORT_FAIL:
+            return {
+                ...state,
+                retrieving : false,
+                reportError : 'Could not retrieve reports. Please double-check and try again!',
+                report : [],
+                reportSuccess: false
+            }
         default:
             return state; 
     }

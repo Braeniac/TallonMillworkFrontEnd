@@ -85,25 +85,25 @@ const logout = (dispatch, navigation) => {
 
 
 //change user information -- first name, last name, and password 
-export const updateUserInformation = (fName, lName, password, token) => {
+export const updateUserInformation = (fName, lName, password, question, answer, token) => {
 
+    console.log(token)
 
     console.log(fName)
     console.log(lName)
     console.log(password)
-    console.log(token)
+    console.log(question)
+    console.log(answer)
+    
+    const array = [fName, lName, password, question, answer]
+
+    console.log(array)
 
     return (dispatch) => {
         return axios.put(
             // 'http://10.0.2.2:8080/api/user', //--android 
             'http://localhost:8080/api/user',
-            {
-                params: {
-                    "fName" : fName,
-                    "lName" : lName,
-                    "password" : password 
-                }
-            },
+            array,
             {
                 headers: {
                     "Authorization" : token
@@ -139,18 +139,12 @@ export const resetQuestion = () => {
 
 
 //recover password ---not working! 
-export const recoverPasswords = (answer, uname, password) => {
+export const recoverPassword = (uname, answer, password) => {
+    const array =  [uname, answer, password]
     return (dispatch) => {
         return axios.put(
             'http://localhost:8080/api/user/forgotPassword',
-            {
-                params: {
-                    "answer" : answer,
-                    "uname" : uname,
-                    "password" : password
-                }
-            }
-
+             array
         ).then(res => console.log(res.data))
         .catch(err => console.log(err))
     }

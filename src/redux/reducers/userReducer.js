@@ -87,6 +87,7 @@ export default user = (state=INITIAL_STATE, action) => {
                 isFetching : false, 
                 error : 'Unable to retrieve users. Please try again!'
             }
+        
         default:
             return state;
     }

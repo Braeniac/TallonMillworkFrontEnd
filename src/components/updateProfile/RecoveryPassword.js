@@ -4,13 +4,13 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 
 //redux
 import { useSelector, useDispatch } from 'react-redux';
-import { recoverPasswords } from '../../redux/actions/authAction'; 
+import { recoverPassword } from '../../redux/actions/authAction'; 
 
-const RecoverPassword = ({ modalVisible, setModalVisable, title}) => {
+const RecoverPassword = ({ modalVisible, setModalVisable, title, setBackToLogin, backToLogin }) => {
 
-    const [uname, setUName] = useState(''); 
-    const [answer, setAnswer] = useState(''); 
-    const [newPassword, setNewPassword] = useState(''); 
+    let [uname, setUName] = useState(''); 
+    let [answer, setAnswer] = useState(''); 
+    let [newPassword, setNewPassword] = useState(''); 
 
     const { error, token, question, questionError } = useSelector(state => state.auth); 
     const dispatch = useDispatch(); 
@@ -88,6 +88,9 @@ const RecoverPassword = ({ modalVisible, setModalVisable, title}) => {
                     <TouchableOpacity
                         onPress={ () => {
                             setModalVisable(!modalVisible)
+                            setUName('')
+                            setAnswer('')
+                            setNewPassword('')
                             dispatch({ type : 'reset_question' })
                         }}
                     >
@@ -96,7 +99,12 @@ const RecoverPassword = ({ modalVisible, setModalVisable, title}) => {
 
                     <TouchableOpacity
                         onPress={ () => { 
-                            dispatch(recoverPasswords(answer, uname, newPassword))
+                            dispatch(recoverPassword(uname, answer, newPassword))
+                            setUName('')
+                            setAnswer('')
+                            setNewPassword('')
+                            setModalVisable(!modalVisible)
+                            setBackToLogin(!backToLogin)
                         }}
                     >
                         <Text style={styles.buttonText}>Submit</Text>

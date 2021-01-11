@@ -55,7 +55,8 @@ const styles = StyleSheet.create({
         borderBottomColor: '#333',
         height: 60, 
         borderBottomWidth: 2,
-        color: '#333'
+        color: '#333',
+        marginBottom: 20
     },
     buttonText: {
         fontSize: 20,

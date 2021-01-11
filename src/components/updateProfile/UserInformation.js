@@ -17,6 +17,7 @@ const UserInformation = ({ onPress }) => {
     const [fName, setFName] = useState(user.fName); 
     const [lName, setLName] = useState(user.lName);
     const [password, setPassword] = useState(''); 
+    const [answer, setAnswer] = useState('');
 
     return(
         <View style={{ marginHorizontal: 20 }}>
@@ -48,6 +49,17 @@ const UserInformation = ({ onPress }) => {
                 value={password}           
             />
 
+            <Text style={{ marginTop: 20}}>{user.recoveryQuestion}</Text>
+
+            <TextInput
+                style={styles.textInput}
+                placeholder="Recovery question answer"
+                autoCapitalize="none"
+                autoCorrect={false}
+                onChangeText={text => setAnswer(text)}
+                value={answer}           
+            />
+
             <View style={styles.button}>
                 <TouchableOpacity
                     onPress={onPress}
@@ -57,8 +69,7 @@ const UserInformation = ({ onPress }) => {
 
                 <TouchableOpacity
                     onPress={ () => {
-                        dispatch(updateUserInformation(fName, lName, password, token)); 
-                        onPress(); 
+                        dispatch(updateUserInformation(fName, lName, password, user.recoveryQuestion, answer, token));
                     }}
                 >
                     <Text style={styles.buttonText}>Submit</Text>

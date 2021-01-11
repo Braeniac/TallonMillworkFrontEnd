@@ -75,7 +75,6 @@ const Login = ({ navigation })  => {
                 modalVisible={modalVisible}
                 setModalVisable={setModalVisible}
                 title="Recover Password"
-                navigation={navigation}
             />
            
            <View

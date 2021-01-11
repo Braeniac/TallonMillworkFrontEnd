@@ -4,7 +4,10 @@ import {
     SUBMIT_REPORT,
     SUBMIT_REPORT_SUCCESS,
     SUBMIT_REPORT_FAIL,
-    RESET_REPORT
+    RESET_REPORT,
+    GET_REPORT,
+    GET_REPORT_SUCCESS,
+    GET_REPORT_FAIL
  } from "./actionTypes"
 
 
@@ -42,7 +45,6 @@ export const submitReport = (token, rname, pid, date, humidity, weather, siteCon
                 dispatch(submitSubtradesOnSite(token, res.data, s))
             })
         })
-        // .then( res => dispatch({ type : SUBMIT_REPORT_SUCCESS, payload : JSON.parse(res.data).rid }))
         .catch( () => dispatch({ type : SUBMIT_REPORT_FAIL }))
     }
 }
@@ -117,8 +119,10 @@ export const retrieveReport = (token) => {
 
 
 //get a report by project id 
+//retrieve installers and subtrades on site 
 export const retrieveReportByID = (token, pid) => {
     return (dispatch) => {
+        dispatch({ type: GET_REPORT })
         return axios.get(
             `http://localhost:8080/api/report/${pid}`,
             {
@@ -126,7 +130,7 @@ export const retrieveReportByID = (token, pid) => {
                     "Authorization" : token 
                 }
             }
-        ).then(res => dispatch({ type: SUBMIT_REPORT_SUCCESS, payload: res.data }))
-        .catch(err => console.log(err))
+        ).then(res => dispatch({ type : GET_REPORT_SUCCESS, payload: res.data}))
+        .catch(err => dispatch({ type : GET_REPORT_FAIL}))
     }
 }

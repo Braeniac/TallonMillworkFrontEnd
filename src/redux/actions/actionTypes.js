@@ -54,3 +54,7 @@ export const SUBMIT_REPORT              = 'sumbit_report';
 export const SUBMIT_REPORT_SUCCESS      = 'submit_report_success'; 
 export const SUBMIT_REPORT_FAIL         = 'submit_report_fail'; 
 export const RESET_REPORT               = 'reset_report';
+
+export const GET_REPORT                 = 'get_report'; 
+export const GET_REPORT_SUCCESS         = 'get_report_success';
+export const GET_REPORT_FAIL            = 'get_report_fail';
