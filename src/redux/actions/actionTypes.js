@@ -58,3 +58,5 @@ export const RESET_REPORT               = 'reset_report';
 export const GET_REPORT                 = 'get_report'; 
 export const GET_REPORT_SUCCESS         = 'get_report_success';
 export const GET_REPORT_FAIL            = 'get_report_fail';
+export const SAVE_INSTALLERS_SUCCESS    = 'save_installers_success'; 
+export const SAVE_SUBTRADES_ON_SITE_SUCCESS = 'save_subtrades_on_site_success'; 

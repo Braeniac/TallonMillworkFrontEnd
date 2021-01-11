@@ -1,39 +1,55 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, Modal, Alert, ScrollView, StyleSheet} from 'react-native';
 import { useIsFocused } from '@react-navigation/native'; 
+//redux
 import { useSelector, useDispatch } from 'react-redux';
+import { retrieveUsers } from '../../redux/actions/userAction';
+import { retrieveInstallersByRID, retrieveSubtradesByRID } from '../../redux/actions/reportAction'; 
 
 const Report = ({ modalVisible, setModalVisable, pname}) => {
     
-    const { report } = useSelector(state => state.report)
+    const { report, installers, subtrades } = useSelector(state => state.report)
+    const { token } = useSelector(state => state.auth)
+    const { user } = useSelector(state => state.user)
 
     const dispatch = useDispatch(); 
 
-
-    const [siteSupervisor, setSiteSupervisor] = useState(0); 
-    const [completedBy, setCompletedBy] = useState(0);
-    const [installers, setInstallers] = useState('');
+    const [siteSupervisor, setSiteSupervisor] = useState(''); 
+    const [completedBy, setCompletedBy] = useState('');
+    const [installer, setInstallers] = useState([]);
     const [subtradesOnSite, setSubtradesOnSite] = useState('');
-
-    
 
     //update page 
     const isFocused = useIsFocused()
 
-    useEffect(() => {
+    const onPress = () => {
         if (report.length > 0) {
             report.map((d, i) => {
-                //get users by id
-                //get subtrades, 
-                //get installers, 
-                
+                //get completed by/site supervisor on site 
+                dispatch(retrieveUsers(token))
+                if (user.length > 0) {
+                    user.map((u, i) => {
+                        if (d.creatorUid === u.uid) {
+                            setCompletedBy(u.fName + " " + u.lName)
+                        }   
+                        if (d.supervisorUid === u.uid) {
+                            setSiteSupervisor(u.fName + " " + u.lName)
+                        }
+                    })
+                }
+                //get subtrades on site 
+                dispatch(retrieveInstallersByRID(token, d.rid))
+                setInstallers(installers)
+
+                dispatch(retrieveSubtradesByRID(token, d.rid))
+                setSubtradesOnSite(subtrades)
             })
         }
-    }, [isFocused])
+    }
+
+ 
 
     
-    
-
     return(
         <Modal
             animationType="slide"
@@ -50,6 +66,14 @@ const Report = ({ modalVisible, setModalVisable, pname}) => {
                     
                     <ScrollView>
 
+                        <TouchableOpacity
+                            onPress={() => onPress()}
+                        >
+                            <Text style={{ textAlign : 'center' }}>update</Text>
+                        </TouchableOpacity>
+
+                       
+
                     {(report.length > 0) ? report.map((d,i) => {
                         key={i}
                             return(
@@ -60,15 +84,15 @@ const Report = ({ modalVisible, setModalVisable, pname}) => {
                                     <Text style={styles.text}>Humidity: {d.humidity}%</Text>
                                     <Text style={styles.text}>Temperature: {d.weather}{'\u00b0'}C</Text>
                                     <Text style={styles.text}>Project: {pname}</Text>
-                                    <Text style={styles.text}>Installers: </Text>
+                                    <Text style={styles.text}>Installers: {installer}</Text>
                                     <Text style={styles.text}>Site Conditions: {d.siteConditions}</Text>
                                     <Text style={styles.text}>Subtrades on site: </Text>
                                     <Text style={styles.text}>Work to be completed: {d.toDo}</Text>
                                     <Text style={styles.text}>Obstacles: {d.obstacles}</Text>
                                     <Text style={styles.text}>Notes: {d.notes}</Text>
                                     <Text style={styles.text}>Next Day Plan: {d.nextDayPlan}</Text>
-                                    <Text style={styles.text}>Site Supervisor: </Text>
-                                    <Text style={styles.text}>Completed By: </Text>
+                                    <Text style={styles.text}>Site Supervisor: {siteSupervisor}</Text>
+                                    <Text style={styles.text}>Completed By: {completedBy}</Text>
                                 </View>
                             )
                         }) : 

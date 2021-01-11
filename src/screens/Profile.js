@@ -57,30 +57,7 @@ const Profile = ({ navigation }) => {
                         modalVisible={changeUsernameModal}
                         setModalVisable={setChangeUserModal}
                         title="Change User Information"
-                    />
-                
-                    <TouchableOpacity
-                        style={styles.button}
-                        onPress={() => {
-                            setPasswordModal(!changePasswordModal)
-                        }}
-                    >
-                        <View style={{ flexDirection: 'row', justifyContent:'space-between'}}>
-                            <Text style={styles.buttonText}>Update Recovery Question/Answer</Text>
-                            <Image 
-                                source={right}
-                            />
-                        </View>
-                    </TouchableOpacity>
-
-
-                    {/* update recovery question/answer */}
-
-                    <PasswordModal
-                        modalVisible={changePasswordModal}
-                        setModalVisable={setPasswordModal}
-                        title="Update Recovery Question"
-                    />
+                    />           
 
                 </View>
                 </ScrollView>

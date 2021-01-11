@@ -57,6 +57,7 @@ const DailyInstallReport = ({ navigation }) => {
     const { allProjects, success } = useSelector(state => state.project); 
     const { error, user, isSuccess } = useSelector(state => state.user); 
     const { reportError } = useSelector(state => state.report);   
+    
     const dispatch = useDispatch(); 
 
     //update page 
@@ -122,7 +123,6 @@ const DailyInstallReport = ({ navigation }) => {
     }
 
     // ERRORS -------------------------------------------------------------------------------------------
-
 
     //user error
     const renderUserError = () => {

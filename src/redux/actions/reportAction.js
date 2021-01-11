@@ -7,7 +7,9 @@ import {
     RESET_REPORT,
     GET_REPORT,
     GET_REPORT_SUCCESS,
-    GET_REPORT_FAIL
+    GET_REPORT_FAIL,
+    SAVE_INSTALLERS_SUCCESS,
+    SAVE_SUBTRADES_ON_SITE_SUCCESS
  } from "./actionTypes"
 
 
@@ -132,5 +134,56 @@ export const retrieveReportByID = (token, pid) => {
             }
         ).then(res => dispatch({ type : GET_REPORT_SUCCESS, payload: res.data}))
         .catch(err => dispatch({ type : GET_REPORT_FAIL}))
+    }
+}
+
+
+
+//retrieve installers
+
+export const retrieveInstallersByRID = (token, rid) => {
+
+    console.log(token)
+    console.log(rid)
+
+
+    return (dispatch) => {
+        return axios.get(
+            'http://localhost:8080/api/report/installer',
+            {
+                params: {
+                    "rid" : rid
+                }
+            },
+            {
+                headers: {
+                    "Authorization" : token
+                }
+            }
+        ).then(res => dispatch({ type: SAVE_INSTALLERS_SUCCESS, payload: res.data}))
+        .catch(err => console.log(err))
+    }
+}
+
+
+
+//retrieve subtrades on site 
+export const retrieveSubtradesByRID = (token, rid) => {
+    
+    return (dispatch) => {
+        return axios.get(
+            'http://localhost:8080/api/report/subtrade',
+            {
+                params: {
+                    "rid" : rid
+                }
+            },
+            {
+                headers: {
+                    "Authorization" : token
+                }
+            }
+        ).then(res => dispatch({ type: SAVE_SUBTRADES_ON_SITE_SUCCESS, payload: res.data}))
+        .catch(err => console.log(err))
     }
 }

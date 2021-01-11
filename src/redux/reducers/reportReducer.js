@@ -5,7 +5,9 @@ import {
     RESET_REPORT,
     GET_REPORT,
     GET_REPORT_SUCCESS,
-    GET_REPORT_FAIL
+    GET_REPORT_FAIL,
+    SAVE_INSTALLERS_SUCCESS,
+    SAVE_SUBTRADES_ON_SITE_SUCCESS
  } from "../actions/actionTypes"; 
 
 const INITIAL_STATE = {
@@ -13,6 +15,7 @@ const INITIAL_STATE = {
     reportError: '',
     retrieving: false,
     reportSuccess: false,
+    installers: []
 }
 
 export default auth = (state=INITIAL_STATE, action) => {
@@ -63,6 +66,16 @@ export default auth = (state=INITIAL_STATE, action) => {
                 reportError : 'Could not retrieve reports. Please double-check and try again!',
                 report : [],
                 reportSuccess: false
+            }
+        case SAVE_INSTALLERS_SUCCESS:
+            return {
+                ...state,
+                installers: action.payload
+            }
+        case SAVE_SUBTRADES_ON_SITE_SUCCESS:
+            return {
+                ...state, 
+                subtrades: action.payload
             }
         default:
             return state; 
