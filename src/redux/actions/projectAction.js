@@ -15,7 +15,7 @@ export const addNewProject = (data, token) => {
         dispatch({ type : ADD_NEW_PROJECT })
         return axios.post(
             //'http://10.0.2.2:8080/api/project', // --android
-            'http://localhost:8080/api/project',
+            'http://10.0.2.2:8080/api/project',
             { "pname" : data },
             {
                 headers: {
@@ -34,7 +34,7 @@ export const allActiveProjects = (token) => {
         dispatch({ type : GET_PROJECTS })
         return axios.get(
             //'http://10.0.2.2:8080/api/project, // --android
-            'http://localhost:8080/api/project',
+            'http://10.0.2.2:8080/api/project',
             {
                 headers: {
                     "Authorization" : token
@@ -53,7 +53,7 @@ export const activeProject = (pid, token) => {
         dispatch({ type : GET_PROJECTS })
         return axios.get(
             // `http://10.0.2.2:8080/api/project/${pid}`, // --android
-            `http://localhost:8080/api/project/${pid}`, 
+            `http://10.0.2.2:8080/api/project/${pid}`, 
             {
                 headers: {
                     "Authorization" : token
