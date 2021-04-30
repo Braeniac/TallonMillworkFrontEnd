@@ -1,4 +1,4 @@
-# Talen Millwork
+# Talon Millwork
 
 ### Description 
 
@@ -41,8 +41,8 @@ To run the project on a specific simulator:
 
 Back End Developers: 
 
-Alexander Freer @freer07 
-Diego Vergara Gonzalez @dv18uj
+- Alexander Freer @freer07 
+- Diego Vergara Gonzalez @dv18uj
 
 
 https://github.com/freer07/TallonMillworkBackend
@@ -51,5 +51,5 @@ https://github.com/freer07/TallonMillworkBackend
 
 ### Contact 
 
-Email: Maninder.singh.live@gmail.com 
+Email: Maninder.singh.live@gmail.com </br>
 LinkedIn: https://www.linkedin.com/in/maninder-singh0518/
