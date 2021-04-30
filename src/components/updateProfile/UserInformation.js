@@ -29,7 +29,8 @@ const UserInformation = ({ onPress }) => {
                 autoCapitalize="none"
                 autoCorrect={false}
                 onChangeText={text => setFName(text)}
-                value={fName}           
+                value={fName}   
+                editable={false}        
             />
 
             <TextInput
@@ -38,7 +39,8 @@ const UserInformation = ({ onPress }) => {
                 autoCapitalize="none"
                 autoCorrect={false}
                 onChangeText={text => setLName(text)}
-                value={lName}           
+                value={lName}    
+                editable={false}          
             />
 
             <TextInput

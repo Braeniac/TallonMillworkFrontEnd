@@ -42,54 +42,8 @@ const HomeScreen = ({ navigation }) => {
             <ScrollView>
                 <Menu navigation={navigation} />
 
-                <View style={{ flexDirection : 'row', justifyContent: 'space-between' }}>
-                    <Text style={styles.title}>Projects </Text>  
-                    <TouchableOpacity
-                        onPress={() => {
-                            //get all projects 
-                            dispatch(allActiveProjects(token))
-                            //store projects in setProjects 
-                            setProjects(allProjects)
-                        }}
-                    >
-                        <Image 
-                            source={refresh}
-                            style={{ marginTop: 34, marginRight: 20 }}
-                        />
-                    </TouchableOpacity>
-                </View>
+               
             
-                {(projects) ? projects.slice(0).reverse().map((d, i) => {
-                        return(
-                            <View style={{ marginRight: 20 }}>
-                                <TouchableOpacity
-                                    style={styles.project}
-                                    onPress={() => {
-                                        setPName(d.pname)
-                                        dispatch(retrieveReportByID(token, d.pid))
-                                        setModalVisable(!modalVisible)
-                                    }}
-                                >
-                                    <View style={{ flexDirection: 'row', justifyContent:'space-between'}}>
-                                        <Text style={styles.projectText}>{d.pname}</Text>
-                                        <Image 
-                                            source={right}
-                                        />
-                                    </View>
-                                </TouchableOpacity>
-                            </View>
-                        )
-                    }) : null}
-
-                    <Report
-                        modalVisible={modalVisible}
-                        setModalVisable={setModalVisable}
-                        title="Daily Install Reports"
-                        pname={pname}
-                        pid={pid}
-                        token={token}
-
-                    />
 
             </ScrollView> }
         </View>

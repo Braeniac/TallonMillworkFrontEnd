@@ -36,7 +36,7 @@ export const loginUser = ({ username, password, navigation }) => {
         dispatch({ type: LOGIN_USER })
         return axios.get(
             //`http://10.0.2.2:8080/api/user/${username}` //--for android
-            `http://10.0.2.2:8080/api/user/${username}`,
+            `http://localhost:8080/api/user/${username}`,
             {
                 headers: {
                     "Authorization" : `Basic ${btoa(username + ":" + password)}`
@@ -92,7 +92,7 @@ export const updateUserInformation = (fName, lName, password, question, answer, 
     return (dispatch) => {
         return axios.put(
             // 'http://10.0.2.2:8080/api/user', //--android 
-            'http://10.0.2.2:8080/api/user',
+            'http://localhost:8080/api/user',
             array,
             {
                 headers: {
@@ -109,7 +109,7 @@ export const forgetPassword = (uname) => {
     return (dispatch) => {
         dispatch({ type: 'STORE_QUESTION' })
         return axios.get(
-            'http://10.0.2.2:8080/api/user/forgotPassword',
+            'http://localhost:8080/api/user/forgotPassword',
             {
                 params: {
                     "uname" : uname
@@ -133,7 +133,7 @@ export const recoverPassword = (uname, answer, password) => {
     const array =  [uname, answer, password]
     return (dispatch) => {
         return axios.put(
-            'http://10.0.2.2:8080/api/user/forgotPassword',
+            'http://localhost:8080/api/user/forgotPassword',
              array
         ).then(res => console.log(res.data))
         .catch(err => console.log(err))

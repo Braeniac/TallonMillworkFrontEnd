@@ -18,7 +18,7 @@ export const submitReport = (token, rname, pid, date, humidity, weather, siteCon
         dispatch({ type : SUBMIT_REPORT })
         return axios.post(
             // 'http://10.0.2.2:8080/api/report', //--android
-            'http://10.0.2.2:8080/api/report',
+            'http://localhost:8080/api/report',
             {
                 "rname" : rname,
                 "pid" : pid,
@@ -55,7 +55,7 @@ export const submitReport = (token, rname, pid, date, humidity, weather, siteCon
 export const submitInstallersOnSite = (token, rid, name) => {
     return (dispatch) => {
         return axios.post(
-            'http://10.0.2.2:8080/api/report/installer',
+            'http://localhost:8080/api/report/installer',
             {
                 headers: {
                     "Authorization" : token
@@ -76,7 +76,7 @@ export const submitInstallersOnSite = (token, rid, name) => {
 export const submitSubtradesOnSite = (token, rid, name) => {
     return (dispatch) => {
         return axios.post(
-            'http://10.0.2.2:8080/api/report/subtrade',
+            'http://localhost:8080/api/report/subtrade',
             {
                 headers: {
                     "Authorization" : token
@@ -107,7 +107,7 @@ export const retrieveReport = (token) => {
     return (dispatch) => {
         return axios.get(
             // 'http://10.0.2.2:8080/api/report', //--android
-            'http://10.0.2.2:8080/api/report',
+            'http://localhost:8080/api/report',
             {
                 headers: {
                     "Authorization" : token
@@ -126,7 +126,7 @@ export const retrieveReportByID = (token, pid) => {
     return (dispatch) => {
         dispatch({ type: GET_REPORT })
         return axios.get(
-            `http://10.0.2.2:8080/api/report/${pid}`,
+            `http://localhost:8080/api/report/${pid}`,
             {
                 headers: {
                     "Authorization" : token 
@@ -149,7 +149,7 @@ export const retrieveInstallersByRID = (token, rid) => {
 
     return (dispatch) => {
         return axios.get(
-            'http://10.0.2.2:8080/api/report/installer',
+            'http://localhost:8080/api/report/installer',
             {
                 params: {
                     "rid" : rid
@@ -172,7 +172,7 @@ export const retrieveSubtradesByRID = (token, rid) => {
     
     return (dispatch) => {
         return axios.get(
-            'http://10.0.2.2:8080/api/report/subtrade',
+            'http://localhost:8080/api/report/subtrade',
             {
                 params: {
                     "rid" : rid

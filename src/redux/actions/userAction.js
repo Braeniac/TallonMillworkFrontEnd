@@ -18,7 +18,7 @@ export const addUser = (token, fName, lName, uname, role, password) => {
         dispatch({ type : ADD_NEW_USER })
         return axios.post(
             //'http://10.0.2.2:8080/api/user',  // --android 
-            'http://10.0.2.2:8080/api/user',
+            'http://localhost:8080/api/user',
             {
                 "fName" : fName, 
                 "lName" : lName,
@@ -46,7 +46,7 @@ export const deleteUser = (token, uname) => {
         dispatch({ type : DELETE_USER })
         return axios.delete(
             //`http://10.0.2.2:8080/api/user/${uname}`,   //--android
-            `http://10.0.2.2:8080/api/user/${uname}`,
+            `http://localhost:8080/api/user/${uname}`,
             {
                 "uname" : uname
             },
@@ -79,7 +79,7 @@ export const retrieveUsers = (token) => {
     return(dispatch) => {
         dispatch({ type : RETRIEVE_USER })
         return axios.get(
-            'http://10.0.2.2:8080/api/user/all',
+            'http://localhost:8080/api/user/all',
             {
                 headers: {
                     "Authorization" : token
